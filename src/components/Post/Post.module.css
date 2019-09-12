@@ -1,0 +1,82 @@
+.post {
+  display: grid;
+  grid-template-rows: minmax(36px, auto) minmax(64px, auto) minmax(
+      36px,
+      auto
+    );
+  grid-template-columns: 40px auto;
+  grid-template-areas: 'aside header' 'aside body' 'aside footer';
+  margin: 30px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 2px 0px rgba(180, 180, 180, 1);
+}
+
+.post span {
+  padding: 8px;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flexRowContainer {
+  composes: flexContainer;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.flexColumnContainer {
+  composes: flexContainer;
+  flex-direction: column;
+}
+
+.postHeader {
+  grid-area: header;
+  composes: flexRowContainer;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.postAside {
+  grid-area: aside;
+  composes: flexColumnContainer;
+  align-items: center;
+  border-right: 1px solid #ccc;
+  background-color: #eee;
+  padding-top: 40px;
+}
+
+.postBody {
+  grid-area: body;
+  composes: flexColumnContainer;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.postFooter {
+  grid-area: footer;
+  composes: flexRowContainer;
+  font-size: 0.875rem;
+}
+
+.category {
+  font-weight: 700;
+  color: black;
+}
+
+.title {
+  font-weight: 700;
+  padding: 8px;
+}
+
+.text {
+  padding: 8px;
+}
+
+.voteControl {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: red;
+}
