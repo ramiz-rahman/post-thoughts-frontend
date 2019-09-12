@@ -7,7 +7,9 @@ import {
 import styles from './Post.module.css';
 
 function Post(props) {
+  const { post, onUpVote, onDownVote } = props;
   const {
+    id,
     category,
     author,
     timestamp,
@@ -15,7 +17,7 @@ function Post(props) {
     body,
     voteScore,
     commentCount
-  } = props.post;
+  } = post;
 
   return (
     <div className={styles.post}>
@@ -31,9 +33,15 @@ function Post(props) {
       </article>
 
       <aside className={styles.postAside}>
-        <UpVote className={styles.voteControl} />
+        <UpVote
+          className={styles.voteControl}
+          onClick={() => onUpVote(id)}
+        />
         <span>{voteScore}</span>
-        <DownVote className={styles.voteControl} />
+        <DownVote
+          className={styles.voteControl}
+          onClick={() => onDownVote(id)}
+        />
       </aside>
 
       <footer className={styles.postFooter}>

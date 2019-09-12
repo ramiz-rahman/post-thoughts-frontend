@@ -12,6 +12,35 @@ class App extends Component {
       this.setState(() => ({ posts }))
     );
   }
+
+  upVote = (postId) => {
+    PostsAPI.vote(postId, { option: 'upVote' }).then(
+      this.setState((prevState) => {
+        const posts = prevState.posts.map((post) => {
+          if (post.id === postId) {
+            post.voteScore += 1;
+          }
+          return post;
+        });
+        return { posts };
+      })
+    );
+  };
+
+  downVote = (postId) => {
+    PostsAPI.vote(postId, { option: 'downVote' }).then(
+      this.setState((prevState) => {
+        const posts = prevState.posts.map((post) => {
+          if (post.id === postId) {
+            post.voteScore -= 1;
+          }
+          return post;
+        });
+        return { posts };
+      })
+    );
+  };
+
   render() {
     return (
       <div className={styles.App}>
@@ -22,7 +51,12 @@ class App extends Component {
         <section>Sort and Filter Controls</section>
         <section>
           {this.state.posts.map((post) => (
-            <Post key={post.id} post={post} />
+            <Post
+              key={post.id}
+              post={post}
+              onUpVote={this.upVote}
+              onDownVote={this.downVote}
+            />
           ))}
         </section>
       </div>
