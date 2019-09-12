@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './App.module.css';
 import Post from './Post/Post';
+import * as PostsAPI from '../utils/PostsAPI';
 
-const samplePost = {
-  id: '8xf0y6ziyjabvozdd253nd',
-  timestamp: 1568319679205,
-  title: 'Udacity is the best place to learn React',
-  body:
-    'Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.Everyone says so after all.',
-  author: 'ramiz732',
-  category: 'react',
-  voteScore: 6,
-  deleted: false,
-  commentCount: 2
-};
-
-function App() {
-  return (
-    <div className={styles.App}>
-      <header className={styles.Header}>
-        <h1>Readable</h1>
-      </header>
-      <section>List of Categories</section>
-      <section>Sort and Filter Controls</section>
-      <section>
-        <Post post={samplePost} />
-      </section>
-    </div>
-  );
+class App extends Component {
+  state = {
+    posts: []
+  };
+  componentDidMount() {
+    PostsAPI.getAllPosts().then((posts) =>
+      this.setState(() => ({ posts }))
+    );
+  }
+  render() {
+    return (
+      <div className={styles.App}>
+        <header className={styles.Header}>
+          <h1>Readable</h1>
+        </header>
+        <section>List of Categories</section>
+        <section>Sort and Filter Controls</section>
+        <section>
+          {this.state.posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+        </section>
+      </div>
+    );
+  }
 }
 
 export default App;
