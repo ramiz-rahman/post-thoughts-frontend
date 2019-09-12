@@ -43,7 +43,7 @@ export const createPost = (post) => {
 };
 
 export const updatePost = (postId, title, body) => {
-  return fetch(`${api}/postId`, {
+  return fetch(`${api}/${postId}`, {
     method: 'PUT',
     headers: {
       ...headers,
@@ -56,7 +56,7 @@ export const updatePost = (postId, title, body) => {
 };
 
 export const deletePost = (postId) => {
-  return fetch(`${api}/postId`, {
+  return fetch(`${api}/${postId}`, {
     method: 'DELETE',
     headers: {
       ...headers,
@@ -68,7 +68,7 @@ export const deletePost = (postId) => {
 };
 
 export const vote = (postId, vote) => {
-  return fetch(`${api}/postId`, {
+  return fetch(`${api}/${postId}`, {
     method: 'POST',
     headers: {
       ...headers,
