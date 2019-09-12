@@ -5,11 +5,15 @@ import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
   state = {
-    posts: []
+    posts: [],
+    categories: []
   };
   componentDidMount() {
     PostsAPI.getAllPosts().then((posts) =>
       this.setState(() => ({ posts }))
+    );
+    PostsAPI.getCategories().then((categories) =>
+      this.setState({ categories: categories })
     );
   }
 
@@ -47,7 +51,13 @@ class App extends Component {
         <header className={styles.Header}>
           <h1>Readable</h1>
         </header>
-        <section>List of Categories</section>
+        <section>
+          <ul>
+            {this.state.categories.map((category) => (
+              <li key={category.path}>{category.name}</li>
+            ))}
+          </ul>
+        </section>
         <section>Sort and Filter Controls</section>
         <section>
           {this.state.posts.map((post) => (

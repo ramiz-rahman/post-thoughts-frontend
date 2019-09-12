@@ -1,5 +1,3 @@
-const api = 'http://localhost:3001/posts';
-
 // Generate Unique Token
 let token = localStorage.token;
 if (!token) {
@@ -8,19 +6,35 @@ if (!token) {
     .substr(-8);
 }
 
+const api = 'http://localhost:3001';
+
 const headers = {
   Accept: 'application/json',
   Authorization: token
 };
 
+// CATEGORIES
+export const getCategories = () => {
+  return fetch(`${api}/categories`, { headers })
+    .then((res) => res.json())
+    .then((data) => data.categories);
+};
+
+export const getPostsInCategory = (category) => {
+  return fetch(`${api}/${category}/posts`)
+    .then((res) => res.json())
+    .then((posts) => posts);
+};
+
+// POSTS
 export const getPost = (postId) => {
-  fetch(`${api}/${postId}`, { headers })
+  fetch(`${api}/posts/${postId}`, { headers })
     .then((res) => res.json())
     .then((post) => post);
 };
 
 export const getAllPosts = () => {
-  return fetch(`${api}`, { headers })
+  return fetch(`${api}/posts`, { headers })
     .then((res) => {
       return res.json();
     })
@@ -30,7 +44,7 @@ export const getAllPosts = () => {
 };
 
 export const createPost = (post) => {
-  return fetch(`${api}`, {
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -43,7 +57,7 @@ export const createPost = (post) => {
 };
 
 export const updatePost = (postId, title, body) => {
-  return fetch(`${api}/${postId}`, {
+  return fetch(`${api}/posts/${postId}`, {
     method: 'PUT',
     headers: {
       ...headers,
@@ -56,7 +70,7 @@ export const updatePost = (postId, title, body) => {
 };
 
 export const deletePost = (postId) => {
-  return fetch(`${api}/${postId}`, {
+  return fetch(`${api}/posts/${postId}`, {
     method: 'DELETE',
     headers: {
       ...headers,
@@ -68,7 +82,7 @@ export const deletePost = (postId) => {
 };
 
 export const vote = (postId, vote) => {
-  return fetch(`${api}/${postId}`, {
+  return fetch(`${api}/posts/${postId}`, {
     method: 'POST',
     headers: {
       ...headers,
