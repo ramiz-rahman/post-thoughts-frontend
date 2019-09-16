@@ -2,7 +2,7 @@
   width: 280px;
   cursor: pointer;
   position: relative;
-  border: 1px solid #e6e6e6;
+  text-transform: lowercase;
 }
 
 .Selector_listOpen {
@@ -28,7 +28,9 @@
   left: 0;
   right: 0;
   background-color: white;
-  border: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
   list-style: none;
   padding: 0;
   display: flex;
@@ -41,8 +43,8 @@
   padding: 18px 16px;
 }
 
-.Selector__ListItem:first-of-type {
-  border-top: 1px solid #e6e6e6;
+.Selector__ListItem:hover {
+  color: #fa7268;
 }
 
 .Selector__ListItem:last-of-type {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
 import Post from './Post/Post';
+import Sort from './Sort/Sort';
+import Backdrop from './UI/Backdrop/Backdrop';
 import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
@@ -58,7 +60,9 @@ class App extends Component {
             ))}
           </ul>
         </section>
-        <section>Sort and Filter Controls</section>
+        <section>
+          Sort By: <Sort />
+        </section>
         <section>
           {this.state.posts.map((post) => (
             <Post

@@ -9,23 +9,18 @@ import Backdrop from '../Backdrop/Backdrop';
 
 class Selector extends Component {
   state = {
-    selected: 'Votes: Ascending',
     open: false
   };
 
-  select = (option) => {
-    this.setState(() => ({
-      selected: option
-    }));
-  };
-
-  toggle = () => {
+  toggle = (e) => {
+    e.preventDefault();
     this.setState((prevState) => ({
       open: !prevState.open
     }));
   };
 
-  close = () => {
+  close = (e) => {
+    e.preventDefault();
     this.setState(() => ({ open: false }), console.log('CLICKed'));
   };
 
@@ -41,19 +36,25 @@ class Selector extends Component {
         <Backdrop show={this.state.open} onClick={this.close} />
         <div className={modifiers} onClick={this.toggle}>
           <div className={styles.Selector__Header}>
-            <div>{this.state.selected}</div>
+            <div>{this.props.selected}</div>
             <Icon className={styles.Selector__Icon} />
           </div>
           <SelectorList
             open={this.state.open}
             options={this.props.options}
-            onClick={this.select}
+            onClick={this.props.onSelect}
           />
         </div>
       </div>
     );
   }
 }
+
+Selector.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
+  selected: PropTypes.string,
+  onSelect: PropTypes.func
+};
 
 function SelectorList(props) {
   const { options, open, onClick } = props;
@@ -66,7 +67,7 @@ function SelectorList(props) {
             <li
               key={option}
               className={styles.Selector__ListItem}
-              onClick={() => onClick(option)}
+              onClick={(e) => onClick(e, option)}
             >
               {option}
             </li>
@@ -78,5 +79,11 @@ function SelectorList(props) {
     return null;
   }
 }
+
+SelectorList.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
+  open: PropTypes.bool,
+  onClick: PropTypes.func
+};
 
 export default Selector;

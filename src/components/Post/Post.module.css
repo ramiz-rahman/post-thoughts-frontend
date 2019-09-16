@@ -10,6 +10,7 @@
   border-radius: 4px;
   border: 1px solid #ddd;
   box-shadow: 0px 2px 2px 0px rgba(180, 180, 180, 1);
+  composes: gray-800 from '../../styles/colors.css';
 }
 
 .post span {
@@ -36,15 +37,15 @@
   grid-area: header;
   composes: flexRowContainer;
   font-size: 0.875rem;
-  color: #666;
+  composes: gray-600 from '../../styles/colors.css';
 }
 
 .postAside {
+  composes: bg-gray-100 from '../../styles/colors.css';
   grid-area: aside;
   composes: flexColumnContainer;
   align-items: center;
   border-right: 1px solid #ccc;
-  background-color: #eee;
   padding-top: 40px;
 }
 
@@ -63,7 +64,7 @@
 
 .category {
   font-weight: 700;
-  color: black;
+  composes: primary-dark from '../../styles/colors.css';
 }
 
 .title {
@@ -76,7 +77,7 @@
 }
 
 .voteControl {
+  composes: primary-dark from '../../styles/colors.css';
   font-size: 1.5rem;
   cursor: pointer;
-  color: red;
 }
