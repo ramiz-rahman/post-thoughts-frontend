@@ -21,7 +21,7 @@ class Selector extends Component {
 
   close = (e) => {
     e.preventDefault();
-    this.setState(() => ({ open: false }), console.log('CLICKed'));
+    this.setState(() => ({ open: false }));
   };
 
   render() {

@@ -1,0 +1,8 @@
+.Modal {
+  width: 500px;
+  padding: 20px;
+  background: red;
+  position: relative;
+  z-index: 110;
+  margin: 0 auto;
+}

@@ -3,12 +3,14 @@ import styles from './App.module.css';
 import Post from './Post/Post';
 import Sort from './Sort/Sort';
 import PostForm from './PostForm/PostForm';
+import Modal from './UI/Modal/Modal';
 import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
   state = {
     posts: [],
-    categories: []
+    categories: [],
+    modalOpen: false
   };
   componentDidMount() {
     PostsAPI.getAllPosts().then((posts) =>
@@ -47,19 +49,33 @@ class App extends Component {
     );
   };
 
+  closeModal = (e) => {
+    e.preventDefault();
+    this.setState(() => ({ modalOpen: false }));
+  };
+
+  openModal = (e) => {
+    e.preventDefault();
+    this.setState(() => ({ modalOpen: true }));
+  };
+
   render() {
     return (
       <div className={styles.App}>
+        <Modal isOpen={this.state.modalOpen} close={this.closeModal}>
+          <PostForm />
+        </Modal>
         <header className={styles.Header}>
           <h1>Readable</h1>
         </header>
-        <PostForm></PostForm>
         <section>
           <ul>
             {this.state.categories.map((category) => (
               <li key={category.path}>{category.name}</li>
             ))}
           </ul>
+
+          <button onClick={this.openModal}>Create Post</button>
         </section>
         <section>
           Sort By: <Sort />
