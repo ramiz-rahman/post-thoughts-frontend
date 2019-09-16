@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Post from './Post/Post';
 import Sort from './Sort/Sort';
-import Backdrop from './UI/Backdrop/Backdrop';
+import PostForm from './PostForm/PostForm';
 import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
@@ -53,6 +53,7 @@ class App extends Component {
         <header className={styles.Header}>
           <h1>Readable</h1>
         </header>
+        <PostForm></PostForm>
         <section>
           <ul>
             {this.state.categories.map((category) => (

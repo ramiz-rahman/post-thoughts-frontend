@@ -53,7 +53,7 @@ class Selector extends Component {
 Selector.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
   selected: PropTypes.string,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func.isRequired
 };
 
 function SelectorList(props) {

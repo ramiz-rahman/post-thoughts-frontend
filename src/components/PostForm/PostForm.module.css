@@ -1,0 +1,10 @@
+.PostForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.PostForm__Field {
+  display: flex;
+  flex-direction: column;
+}
