@@ -1,0 +1,16 @@
+.Button {
+  composes: bg-primary from '../../../styles/colors.css';
+  border: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Button:hover {
+  background-color: #de4d44;
+  color: white;
+}
