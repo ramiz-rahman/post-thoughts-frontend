@@ -6,7 +6,7 @@ function Button(props) {
   const { Icon, value, onClick } = props;
   return (
     <button onClick={onClick} className={styles.Button}>
-      <Icon className={styles.Button__Icon} />
+      {Icon && <Icon className={styles.Button__Icon} />}
       <span>{value}</span>
     </button>
   );
