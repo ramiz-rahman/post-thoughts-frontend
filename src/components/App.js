@@ -5,6 +5,7 @@ import Sort from './Sort/Sort';
 import PostForm from './PostForm/PostForm';
 import Modal from './UI/Modal/Modal';
 import Button from './UI/Button/Button';
+import { MdAdd as Add } from 'react-icons/md';
 import * as PostsAPI from '../utils/PostsAPI';
 
 class App extends Component {
@@ -76,7 +77,11 @@ class App extends Component {
             ))}
           </ul>
 
-          <Button onClick={this.openModal} value="Create Post" />
+          <Button
+            onClick={this.openModal}
+            value="Create Post"
+            Icon={Add}
+          />
         </section>
         <section>
           Sort By: <Sort />

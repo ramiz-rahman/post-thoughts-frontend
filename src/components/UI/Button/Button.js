@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
 function Button(props) {
-  const { icon, value, onClick } = props;
+  const { Icon, value, onClick } = props;
   return (
     <button onClick={onClick} className={styles.Button}>
-      <span>{icon}</span>
+      <Icon className={styles.Button__Icon} />
       <span>{value}</span>
     </button>
   );
 }
 
 Button.propTypes = {
-  icon: PropTypes.object,
+  Icon: PropTypes.func,
   value: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };

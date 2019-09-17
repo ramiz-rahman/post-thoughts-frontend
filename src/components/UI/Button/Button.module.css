@@ -1,6 +1,7 @@
 .Button {
   composes: bg-primary from '../../../styles/colors.css';
   border: none;
+  outline: none;
   text-transform: uppercase;
   border-radius: 4px;
   padding: 16px;
@@ -10,7 +11,16 @@
   justify-content: space-between;
 }
 
+.Button:focus {
+  outline: none;
+}
+
 .Button:hover {
   background-color: #de4d44;
   color: white;
+}
+
+.Button__Icon {
+  font-size: 24px;
+  padding-right: 8px;
 }
