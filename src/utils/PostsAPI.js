@@ -96,10 +96,9 @@ export const vote = (postId, vote) => {
 
 // COMMENTS
 
-// GET /posts/:id/comments
-// USAGE:
-//   Get all the comments for a single post
-
+/* GET /posts/:id/comments
+USAGE:
+  Get all the comments for a single post */
 export const getPostComments = (postId) => {
   return fetch(`${api}/posts/${postId}/comments`, { headers })
     .then((res) => {
@@ -113,23 +112,51 @@ export const getPostComments = (postId) => {
 // POST /comments
 // USAGE:
 //   Add a comment to a post
-
 // PARAMS:
 //   id: Any unique ID. As with posts, UUID is probably the best here.
 //   timestamp: timestamp. Get this however you want.
 //   body: String
 //   author: String
 //   parentId: Should match a post id in the database.
+export const addCommentToPost = (comment) => {
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  })
+    .then((res) => res.json())
+    .then((comment) => comment);
+};
 
 // GET /comments/:id
 // USAGE:
 //   Get the details for a single comment
+export const getComment = (commentId) => {
+  return fetch(`${api}/comments/${commentId}`, headers)
+    .then((res) => res.json())
+    .then((comment) => comment);
+};
 
 // POST /comments/:id
 // USAGE:
 //   Used for voting on a comment.
 // PARAMS:
 //   option - String: Either "upVote" or "downVote"
+export const voteOnComment = (commentId, option) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(option)
+  })
+    .then((res) => res.json())
+    .then((comment) => comment);
+};
 
 // PUT /comments/:id
 // USAGE:
