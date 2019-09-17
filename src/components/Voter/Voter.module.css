@@ -1,0 +1,38 @@
+.Voter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Voter__UpVote {
+  cursor: pointer;
+}
+
+.Voter__UpVote:hover {
+  color: #00dee6;
+}
+
+.Voter__DownVote {
+  cursor: pointer;
+}
+
+.Voter__DownVote:hover {
+  color: #de4d44;
+}
+
+.Voter_horizontal {
+  flex-direction: row;
+}
+
+.Voter_size_s {
+  font-size: 1rem;
+}
+
+.Voter_size_m {
+  font-size: 1.5rem;
+}
+
+.Voter_size_l {
+  font-size: 2rem;
+}
