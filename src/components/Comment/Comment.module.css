@@ -1,0 +1,45 @@
+.Comment {
+  display: grid;
+  grid-template-rows: minmax(20px, auto) minmax(40px, auto) minmax(
+      20px,
+      auto
+    );
+  grid-template-columns: 40px auto;
+  grid-template-areas: 'aside header' 'aside body' 'aside footer';
+  border-radius: 4px;
+  max-width: 512px;
+  align-items: center;
+  margin: 20px;
+}
+
+.Comment__Header {
+  grid-area: header;
+  font-size: 0.875rem;
+  padding: 0 8px;
+}
+
+.Comment__Body {
+  grid-area: body;
+  padding: 0 8px;
+}
+
+.Comment__Aside {
+  grid-area: aside;
+  border-right: 2px solid #e6e6e6;
+  height: 100%;
+  padding-top: 10px;
+}
+
+.Comment__Aside_votes_positive {
+  border-color: #009499;
+}
+
+.Comment__Aside_votes_negative {
+  border-color: #de4d44;
+}
+
+.Comment__Footer {
+  grid-area: footer;
+  font-size: 0.875rem;
+  padding: 0 8px;
+}
