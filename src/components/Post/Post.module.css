@@ -13,27 +13,12 @@
   color: #333;
 }
 
-.flexContainer {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.flexRowContainer {
-  composes: flexContainer;
-  flex-flow: row wrap;
-  align-items: center;
-}
-
-.flexColumnContainer {
-  composes: flexContainer;
-  flex-direction: column;
-}
-
 .Post__Header {
   grid-area: header;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   color: #666;
   font-size: 0.875rem;
   padding: 8px;

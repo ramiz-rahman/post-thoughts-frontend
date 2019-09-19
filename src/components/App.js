@@ -5,6 +5,7 @@ import Sort from './Sort/Sort';
 import PostForm from './PostForm/PostForm';
 import Modal from './UI/Modal/Modal';
 import Button from './UI/Button/Button';
+import PostDetail from './PostDetail/PostDetail';
 import { MdAdd as Add } from 'react-icons/md';
 import * as PostsAPI from '../utils/PostsAPI';
 
@@ -23,32 +24,51 @@ class App extends Component {
     );
   }
 
-  upVote = (postId) => {
-    PostsAPI.vote(postId, { option: 'upVote' }).then(
-      this.setState((prevState) => {
-        const posts = prevState.posts.map((post) => {
-          if (post.id === postId) {
-            post.voteScore += 1;
-          }
-          return post;
-        });
-        return { posts };
-      })
-    );
+  voteOnPost = async (postId, vote, e) => {
+    e.preventDefault();
+
+    const votedPost = await PostsAPI.voteOnPost(postId, {
+      option: vote
+    });
+
+    const _updateIfNew = (post, newPost) => {
+      return post.id === newPost.id ? newPost : post;
+    };
+
+    const _updatePosts = (posts, newPost) => {
+      return posts.map((post) => _updateIfNew(post, newPost));
+    };
+
+    this.setState((prevState) => ({
+      posts: _updatePosts(prevState.posts, votedPost)
+    }));
   };
 
-  downVote = (postId) => {
-    PostsAPI.vote(postId, { option: 'downVote' }).then(
-      this.setState((prevState) => {
-        const posts = prevState.posts.map((post) => {
-          if (post.id === postId) {
-            post.voteScore -= 1;
-          }
-          return post;
-        });
-        return { posts };
-      })
+  upVote = async (postId, e) => {
+    this.voteOnPost(postId, 'upVote', e);
+  };
+
+  downVote = async (postId, e) => {
+    this.voteOnPost(postId, 'downVote', e);
+  };
+
+  editPost = async (postId, title, body, e) => {
+    e.preventDefault();
+    const updatedPost = await PostsAPI.updatePost(postId, title, body);
+    const posts = this.state.map((post) =>
+      post.id === updatedPost.id ? updatedPost : post
     );
+    this.setState({ posts });
+  };
+
+  deletePost = async (postId, e) => {
+    e.preventDefault();
+    const deletedPost = await PostsAPI.deletePost(postId);
+    this.setState((prevState) => ({
+      posts: prevState.posts.filter(
+        (post) => post.id !== deletedPost.id
+      )
+    }));
   };
 
   closeModal = (e) => {
@@ -87,12 +107,18 @@ class App extends Component {
           Sort By: <Sort />
         </section>
         <section>
+          <PostDetail
+            post={this.state.posts ? this.state.posts[0] : null}
+          />
+        </section>
+        <section>
           {this.state.posts.map((post) => (
             <Post
               key={post.id}
               post={post}
-              onUpVote={this.upVote}
-              onDownVote={this.downVote}
+              onUpVote={this.upVote.bind(null, post.id)}
+              onDownVote={this.downVote.bind(null, post.id)}
+              onDelete={this.deletePost.bind(null, post.id)}
             />
           ))}
         </section>

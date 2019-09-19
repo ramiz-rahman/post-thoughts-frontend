@@ -27,12 +27,10 @@ export const getPostsInCategory = (category) => {
 };
 
 // POSTS
-export const getPost = (postId) => {
-  fetch(`${api}/posts/${postId}`, { headers })
-    .then((res) => res.json())
-    .then((post) => post);
-};
 
+/* GET /posts
+USAGE:
+  Get all of the posts. Useful for the main page when no category is selected. */
 export const getAllPosts = () => {
   return fetch(`${api}/posts`, { headers })
     .then((res) => {
@@ -43,6 +41,16 @@ export const getAllPosts = () => {
     });
 };
 
+/* POST /posts
+USAGE:
+  Add a new post
+PARAMS:
+  id - UUID should be fine, but any unique id will work
+  timestamp - timestamp in whatever format you like, you can use Date.now() if you like
+  title - String
+  body - String
+  author - String
+  category: Any of the categories listed in categories.js. Feel free to extend this list as you desire. */
 export const createPost = (post) => {
   return fetch(`${api}/posts`, {
     method: 'POST',
@@ -56,6 +64,39 @@ export const createPost = (post) => {
     .then((post) => post);
 };
 
+/* GET /posts/:id
+USAGE:
+  Get the details of a single post */
+export const getPost = (postId) => {
+  fetch(`${api}/posts/${postId}`, { headers })
+    .then((res) => res.json())
+    .then((post) => post);
+};
+
+/* POST /posts/:id
+USAGE:
+  Used for voting on a post
+PARAMS:
+  option - String: Either "upVote" or "downVote" */
+export const voteOnPost = (postId, option) => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(option)
+  })
+    .then((res) => res.json())
+    .then((post) => post);
+};
+
+/* PUT /posts/:id
+USAGE:
+  Edit the details of an existing post
+PARAMS:
+  title - String
+  body - String */
 export const updatePost = (postId, title, body) => {
   return fetch(`${api}/posts/${postId}`, {
     method: 'PUT',
@@ -65,10 +106,14 @@ export const updatePost = (postId, title, body) => {
     },
     body: JSON.stringify({ title, body })
   })
-    .then((res) => res.json)
+    .then((res) => res.json())
     .then((post) => post);
 };
 
+/* DELETE /posts/:id
+USAGE:
+  Sets the deleted flag for a post to 'true'.
+  Sets the parentDeleted flag for all child comments to 'true'. */
 export const deletePost = (postId) => {
   return fetch(`${api}/posts/${postId}`, {
     method: 'DELETE',
@@ -77,21 +122,8 @@ export const deletePost = (postId) => {
       'Content-Type': 'application/json'
     }
   })
-    .then((res) => res.json)
+    .then((res) => res.json())
     .then((post) => post);
-};
-
-export const vote = (postId, vote) => {
-  return fetch(`${api}/posts/${postId}`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(vote)
-  })
-    .then((res) => res.json)
-    .then((post) => post.json);
 };
 
 // COMMENTS
