@@ -1,15 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
-import {
-  MdThumbUp as UpVote,
-  MdThumbDown as DownVote
-} from 'react-icons/md';
 import styles from './Post.module.css';
+
+import Voter from '../Voter/Voter';
 
 function Post(props) {
   const { post, onUpVote, onDownVote } = props;
   const {
-    id,
     category,
     author,
     timestamp,
@@ -20,35 +18,38 @@ function Post(props) {
   } = post;
 
   return (
-    <div className={styles.post}>
-      <header className={styles.postHeader}>
-        <span className={styles.category}>{category}</span> |
-        <span className={styles.author}>posted by {author}</span> .
+    <div className={styles.Post}>
+      <header className={styles.Post__Header}>
+        <span className={styles.Post__Category}>{category}</span>
+        <span>|</span>
+        <span>posted by {author}</span>
         <span>{moment(timestamp).calendar()}</span>
       </header>
 
-      <article className={styles.postBody}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.text}>{body}</p>
+      <article className={styles.Post__Body}>
+        <h3 className={styles.Post__Title}>{title}</h3>
+        <p>{body}</p>
       </article>
 
-      <aside className={styles.postAside}>
-        <UpVote
-          className={styles.voteControl}
-          onClick={() => onUpVote(id)}
-        />
-        <span>{voteScore}</span>
-        <DownVote
-          className={styles.voteControl}
-          onClick={() => onDownVote(id)}
+      <aside className={styles.Post__Aside}>
+        <Voter
+          voteScore={voteScore}
+          onUpVote={onUpVote}
+          onDownVote={onDownVote}
         />
       </aside>
 
-      <footer className={styles.postFooter}>
+      <footer className={styles.Post__Footer}>
         <span>{commentCount} Comments</span>
       </footer>
     </div>
   );
 }
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  onUpVote: PropTypes.func.isRequired,
+  onDownVote: PropTypes.func.isRequired
+};
 
 export default Post;

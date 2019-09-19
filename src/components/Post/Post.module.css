@@ -1,4 +1,4 @@
-.post {
+.Post {
   display: grid;
   grid-template-rows: minmax(36px, auto) minmax(64px, auto) minmax(
       36px,
@@ -8,13 +8,9 @@
   grid-template-areas: 'aside header' 'aside body' 'aside footer';
   margin: 30px;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid #e6e6e6;
   box-shadow: 0px 2px 2px 0px rgba(180, 180, 180, 1);
-  composes: gray-800 from '../../styles/colors.css';
-}
-
-.post span {
-  padding: 8px;
+  color: #333;
 }
 
 .flexContainer {
@@ -33,51 +29,50 @@
   flex-direction: column;
 }
 
-.postHeader {
+.Post__Header {
   grid-area: header;
-  composes: flexRowContainer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #666;
   font-size: 0.875rem;
-  composes: gray-600 from '../../styles/colors.css';
+  padding: 8px;
 }
 
-.postAside {
-  composes: bg-gray-100 from '../../styles/colors.css';
+.Post__Header span {
+  padding-left: 0.5rem;
+}
+
+.Post__Category {
+  font-weight: 700;
+  color: #de4d44;
+}
+
+.Post__Aside {
   grid-area: aside;
-  composes: flexColumnContainer;
   align-items: center;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #e6e6e6;
+  background-color: #e6e6e6;
   padding-top: 40px;
 }
 
-.postBody {
+.Post__Body {
   grid-area: body;
-  composes: flexColumnContainer;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  padding: 8px;
 }
 
-.postFooter {
+.Post__Title {
+  font-weight: 700;
+}
+
+.Post__Footer {
   grid-area: footer;
-  composes: flexRowContainer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #666;
   font-size: 0.875rem;
-}
-
-.category {
-  font-weight: 700;
-  composes: primary-dark from '../../styles/colors.css';
-}
-
-.title {
-  font-weight: 700;
   padding: 8px;
-}
-
-.text {
-  padding: 8px;
-}
-
-.voteControl {
-  composes: primary-dark from '../../styles/colors.css';
-  font-size: 1.5rem;
-  cursor: pointer;
 }
