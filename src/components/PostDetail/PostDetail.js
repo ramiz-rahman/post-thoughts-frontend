@@ -5,6 +5,7 @@ import styles from './PostDetail.module.css';
 import Post from '../Post/Post';
 import Button from '../UI/Button/Button';
 import Comment from '../Comment/Comment';
+import CommentForm from '../CommentForm/CommentForm';
 import * as API from '../../utils/PostsAPI';
 
 class PostDetail extends Component {
@@ -24,20 +25,6 @@ class PostDetail extends Component {
       );
     }
   }
-
-  handleChange = (e, attr) => {
-    e.preventDefault();
-    const value = e.target.value;
-    this.setState({ [attr]: value });
-  };
-
-  handleCommentChange = (e) => {
-    this.handleChange(e, 'currentComment');
-  };
-
-  handleAuthorChange = (e) => {
-    this.handleChange(e, 'author');
-  };
 
   voteOnComment = async (id, vote, e) => {
     e.preventDefault();
@@ -68,26 +55,21 @@ class PostDetail extends Component {
     this.voteOnComment(id, 'downVote', e);
   };
 
-  addComment = (e) => {
+  addComment = async (author, body, e) => {
     e.preventDefault();
-    if (this.state.postId && this.state.currentComment) {
-      const newComment = {
+    if (this.state.postId) {
+      let newComment = {
         id: uuidv5('ramiz'),
         parentId: this.state.postId,
         timestamp: Date.now(),
-        author: this.state.author,
-        body: this.state.currentComment
+        author: author,
+        body: body
       };
 
-      console.log(newComment);
-
-      API.addCommentToPost(newComment).then((comment) =>
-        this.setState((prevState) => ({
-          comments: [...prevState.comments, comment],
-          currentComment: '',
-          author: ''
-        }))
-      );
+      newComment = await API.addCommentToPost(newComment);
+      this.setState((prevState) => ({
+        comments: [...prevState.comments, newComment]
+      }));
     }
   };
 
@@ -117,25 +99,7 @@ class PostDetail extends Component {
     return (
       <div>
         {this.props.post && <Post post={this.props.post} />}
-        <form onSubmit={this.addComment}>
-          <label>
-            comment
-            <textarea
-              placeholder="What are your thoughts?"
-              value={this.state.currentComment}
-              onChange={this.handleCommentChange}
-            />
-            <Button value="comment" onClick={this.addComment} />
-          </label>
-          <label>
-            author
-            <input
-              placeholder="Your name?"
-              value={this.state.author}
-              onChange={this.handleAuthorChange}
-            />
-          </label>
-        </form>
+        <CommentForm onSubmit={this.addComment} />
         <div>
           {this.state.comments.map((comment) => (
             <Comment
