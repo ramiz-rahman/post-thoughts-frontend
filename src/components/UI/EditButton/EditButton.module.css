@@ -1,0 +1,9 @@
+.EditButton {
+  padding: 4px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.EditButton:hover {
+  color: #009499;
+}
