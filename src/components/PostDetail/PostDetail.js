@@ -91,6 +91,28 @@ class PostDetail extends Component {
     }
   };
 
+  editComment = async (id, body, e) => {
+    e.preventDefault();
+    const timestamp = Date.now();
+    const updatedComment = await API.editComment(id, timestamp, body);
+    const upDateIf = (comment, updatedComment) => {
+      return comment.id === updatedComment ? updatedComment : comment;
+    };
+    const comments = this.state.comments.map((comment) =>
+      upDateIf(comment, updatedComment)
+    );
+    this.setState({ comments });
+  };
+
+  deleteComment = async (id, e) => {
+    e.preventDefault();
+    const deletedComment = await API.deleteComment(id);
+    const comments = this.state.comments.filter(
+      (comment) => comment.id !== deletedComment.id
+    );
+    this.setState({ comments });
+  };
+
   render() {
     return (
       <div>
@@ -121,6 +143,8 @@ class PostDetail extends Component {
               comment={comment}
               onUpVote={this.upVoteComment.bind(null, comment.id)}
               onDownVote={this.downVoteComment.bind(null, comment.id)}
+              onEdit={this.editComment.bind(null, comment.id)}
+              onDelete={this.deleteComment.bind(null, comment.id)}
             />
           ))}
         </div>

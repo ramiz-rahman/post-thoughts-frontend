@@ -109,15 +109,15 @@ export const getPostComments = (postId) => {
     });
 };
 
-// POST /comments
-// USAGE:
-//   Add a comment to a post
-// PARAMS:
-//   id: Any unique ID. As with posts, UUID is probably the best here.
-//   timestamp: timestamp. Get this however you want.
-//   body: String
-//   author: String
-//   parentId: Should match a post id in the database.
+/* POST /comments
+USAGE:
+  Add a comment to a post
+PARAMS:
+  id: Any unique ID. As with posts, UUID is probably the best here.
+  timestamp: timestamp. Get this however you want.
+  body: String
+  author: String
+  parentId: Should match a post id in the database. */
 export const addCommentToPost = (comment) => {
   return fetch(`${api}/comments`, {
     method: 'POST',
@@ -131,20 +131,20 @@ export const addCommentToPost = (comment) => {
     .then((comment) => comment);
 };
 
-// GET /comments/:id
-// USAGE:
-//   Get the details for a single comment
+/* GET /comments/:id
+USAGE:
+  Get the details for a single comment */
 export const getComment = (commentId) => {
   return fetch(`${api}/comments/${commentId}`, headers)
     .then((res) => res.json())
     .then((comment) => comment);
 };
 
-// POST /comments/:id
-// USAGE:
-//   Used for voting on a comment.
-// PARAMS:
-//   option - String: Either "upVote" or "downVote"
+/* POST /comments/:id
+USAGE:
+  Used for voting on a comment.
+PARAMS:
+  option - String: Either "upVote" or "downVote" */
 export const voteOnComment = (commentId, option) => {
   return fetch(`${api}/comments/${commentId}`, {
     method: 'POST',
@@ -158,14 +158,33 @@ export const voteOnComment = (commentId, option) => {
     .then((comment) => comment);
 };
 
-// PUT /comments/:id
-// USAGE:
-//   Edit the details of an existing comment
+/* PUT /comments/:id
+USAGE:
+  Edit the details of an existing comment
+PARAMS:
+  timestamp: timestamp. Get this however you want.
+  body: String */
+export const editComment = (commentId, timestamp, body) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ timestamp, body })
+  })
+    .then((res) => res.json())
+    .then((comment) => comment);
+};
 
-// PARAMS:
-//   timestamp: timestamp. Get this however you want.
-//   body: String
-
-// DELETE /comments/:id
-// USAGE:
-//   Sets a comment's deleted flag to 'true'
+/* DELETE /comments/:id
+USAGE:
+  Sets a comment's deleted flag to 'true' */
+export const deleteComment = (commentId) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+    .then((res) => res.json())
+    .then((comment) => comment);
+};
