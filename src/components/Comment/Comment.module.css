@@ -43,3 +43,19 @@
   font-size: 0.875rem;
   padding: 0 8px;
 }
+
+.Comment__Action {
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0 8px 0 0;
+}
+
+.Comment__Action:hover {
+  cursor: pointer;
+  color: #009499;
+}
+
+.Comment__Action:focus {
+  outline: none;
+}

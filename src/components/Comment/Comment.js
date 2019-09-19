@@ -150,13 +150,21 @@ function CommentFooter({
 }) {
   const actions = isEditing ? (
     <Fragment>
-      <button onClick={onEditSave}>Save</button>
-      <button onClick={onEditCancel}>Cancel</button>
+      <button onClick={onEditSave} className={styles.Comment__Action}>
+        Save
+      </button>
+      <button onClick={onEditCancel} className={styles.Comment__Action}>
+        Cancel
+      </button>
     </Fragment>
   ) : (
     <Fragment>
-      <button onClick={onEdit}>Edit</button>
-      <button onClick={onDelete}>Delete</button>
+      <button onClick={onEdit} className={styles.Comment__Action}>
+        Edit
+      </button>
+      <button onClick={onDelete} className={styles.Comment__Action}>
+        Delete
+      </button>
     </Fragment>
   );
   return <footer className={styles.Comment__Footer}>{actions}</footer>;
@@ -169,4 +177,5 @@ CommentFooter.propTypes = {
   onEditCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired
 };
+
 export default Comment;
