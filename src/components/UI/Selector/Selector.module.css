@@ -1,5 +1,5 @@
 .Selector {
-  width: 280px;
+  min-width: 200px;
   cursor: pointer;
   position: relative;
   text-transform: lowercase;
@@ -13,13 +13,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  padding: 8px 20px;
+  height: 56px;
+  padding: 1rem;
 }
 
 .Selector__Icon {
   font-size: 1.5rem;
+  margin-left: 1rem;
 }
 
 .Selector__List {

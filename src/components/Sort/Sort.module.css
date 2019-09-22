@@ -3,14 +3,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 344px;
-  padding: 0 8px;
+  padding: 0 0.5rem;
+  min-width: 320px;
+
   border: 1px solid #e6e6e6;
   box-shadow: 0 2px 2px 0 #e6e6e6;
   border-radius: 8px;
 }
 
+.Sort__Label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
 .Sort__Icon {
   color: #fa7268;
   font-size: 2rem;
+  margin-right: 0.5rem;
 }

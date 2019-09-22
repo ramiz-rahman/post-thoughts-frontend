@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { MdSort as Icon } from 'react-icons/md';
 import Selector from '../UI/Selector/Selector';
 import styles from './Sort.module.css';
 
 class Sort extends Component {
   state = {
-    options: [
-      'Votes: Ascending',
-      'Votes: Descending',
-      'Time: Ascending',
-      'Time: Descending'
-    ],
-    selected: 'Votes: Ascending'
+    selected: 'default'
   };
 
   handleSelect = (e, option) => {
@@ -19,20 +14,30 @@ class Sort extends Component {
     this.setState(() => ({
       selected: option
     }));
+    this.props.onSort(e, option);
   };
 
   render() {
     return (
       <div className={styles.Sort}>
-        <Icon className={styles.Sort__Icon} />
+        <div className={styles.Sort__Label}>
+          <Icon className={styles.Sort__Icon} />
+          <span>Sort By</span>
+        </div>
+
         <Selector
           selected={this.state.selected}
-          options={this.state.options}
+          options={this.props.options}
           onSelect={this.handleSelect}
         />
       </div>
     );
   }
 }
+
+Sort.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onSort: PropTypes.func.isRequired
+};
 
 export default Sort;

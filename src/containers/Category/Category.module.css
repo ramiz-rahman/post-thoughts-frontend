@@ -1,0 +1,20 @@
+.Category__Nav {
+  min-width: 320px;
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem auto;
+}
+
+.Category__Sort {
+  width: 50%;
+  min-width: 320px;
+  margin: 3rem auto;
+}
+
+.Category__Post {
+  border-radius: 0.5rem;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 2px 2px 0 #e6e6e6;
+  margin: 20px;
+  overflow: hidden;
+}
