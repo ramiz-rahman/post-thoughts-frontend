@@ -28,7 +28,14 @@ class Category extends Component {
 
   componentDidUpdate() {
     const currentPath = this.props.match.params.id;
-    if (currentPath !== this.state.currentPath)
+    if (
+      currentPath &&
+      currentPath !== this.state.currentPath &&
+      (this.state.categories
+        .map((category) => category.path)
+        .includes(currentPath) ||
+        currentPath === 'all')
+    )
       this.setState({ currentPath });
   }
 
@@ -85,13 +92,9 @@ class Category extends Component {
     this.voteOnPost(postId, 'downVote', e);
   };
 
-  editPost = async (postId, title, body, e) => {
+  editPost = async (postId, e) => {
     e.preventDefault();
-    const updatedPost = await API.updatePost(postId, title, body);
-    const posts = this.state.map((post) =>
-      post.id === updatedPost.id ? updatedPost : post
-    );
-    this.setState({ posts });
+    this.props.history.push(`/posts/edit/${postId}`);
   };
 
   deletePost = async (postId, e) => {
@@ -102,6 +105,11 @@ class Category extends Component {
         (post) => post.id !== deletedPost.id
       )
     }));
+  };
+
+  viewDetail = (postId, e) => {
+    e.preventDefault();
+    this.props.history.push(`/posts/${postId}`);
   };
 
   _filterPosts = () => {
@@ -132,6 +140,7 @@ class Category extends Component {
             options={this.state.sortOrders}
             onSort={this.handleSort}
           />
+          <Link to="/posts/new">Create Post</Link>
         </section>
 
         <section>
@@ -143,6 +152,7 @@ class Category extends Component {
                 onDownVote={this.downVotePost.bind(null, post.id)}
                 onEdit={this.editPost.bind(null, post.id)}
                 onDelete={this.deletePost.bind(null, post.id)}
+                onViewDetail={this.viewDetail.bind(null, post.id)}
               />
             </div>
           ))}

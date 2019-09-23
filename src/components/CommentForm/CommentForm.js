@@ -37,6 +37,7 @@ class CommentForm extends Component {
         <label className={styles.CommentForm__Header}>
           Comment as{' '}
           <input
+            className={styles.CommentForm__AuthorInput}
             type="text"
             value={this.state.author}
             onChange={this.handleAuthorChange}

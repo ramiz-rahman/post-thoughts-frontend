@@ -6,7 +6,7 @@ import styles from './Sort.module.css';
 
 class Sort extends Component {
   state = {
-    selected: 'default'
+    selected: ''
   };
 
   handleSelect = (e, option) => {
@@ -27,6 +27,7 @@ class Sort extends Component {
 
         <Selector
           selected={this.state.selected}
+          placeholder="Default"
           options={this.props.options}
           onSelect={this.handleSelect}
         />

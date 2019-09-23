@@ -1,30 +1,57 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import uuidv5 from 'node-uuid';
 import styles from './PostDetail.module.css';
-import Post from '../Post/Post';
-import Button from '../UI/Button/Button';
-import Comment from '../Comment/Comment';
-import CommentForm from '../CommentForm/CommentForm';
+import Post from '../../components/Post/Post';
+import Comment from '../../components/Comment/Comment';
+import CommentForm from '../../components/CommentForm/CommentForm';
 import * as API from '../../utils/PostsAPI';
 
 class PostDetail extends Component {
   state = {
-    postId: null,
-    comments: [],
-    currentComment: '',
-    author: ''
+    post: null,
+    comments: []
   };
 
-  componentDidUpdate() {
-    const postId = this.props.post ? this.props.post.id : null;
-    if (postId && postId !== this.state.postId) {
-      this.setState(() => ({ postId }));
-      API.getPostComments(postId).then((comments) =>
-        this.setState({ comments })
-      );
-    }
+  componentDidMount() {
+    const postId = this.props.match.params.id;
+    API.getPost(postId).then((post) => this.setState({ post }));
+    API.getPostComments(postId).then((comments) =>
+      this.setState({ comments })
+    );
   }
+
+  voteOnPost = async (postId, vote, e) => {
+    e.preventDefault();
+
+    const votedPost = await API.voteOnPost(postId, {
+      option: vote
+    });
+
+    this.setState({ post: votedPost });
+  };
+
+  upVotePost = async (postId, e) => {
+    this.voteOnPost(postId, 'upVote', e);
+  };
+
+  downVotePost = async (postId, e) => {
+    this.voteOnPost(postId, 'downVote', e);
+  };
+
+  editPost = async (postId, e) => {
+    e.preventDefault();
+    this.props.history.push(`/posts/edit/${postId}`);
+  };
+
+  deletePost = async (postId, e) => {
+    e.preventDefault();
+    const deletedPost = await API.deletePost(postId);
+    this.setState((prevState) => ({
+      posts: prevState.posts.filter(
+        (post) => post.id !== deletedPost.id
+      )
+    }));
+  };
 
   voteOnComment = async (id, vote, e) => {
     e.preventDefault();
@@ -57,10 +84,10 @@ class PostDetail extends Component {
 
   addComment = async (author, body, e) => {
     e.preventDefault();
-    if (this.state.postId) {
+    if (this.state.post) {
       let newComment = {
         id: uuidv5('ramiz'),
-        parentId: this.state.postId,
+        parentId: this.state.post.id,
         timestamp: Date.now(),
         author: author,
         body: body
@@ -96,11 +123,29 @@ class PostDetail extends Component {
   };
 
   render() {
+    const post = this.state.post;
     return (
-      <div>
-        {this.props.post && <Post post={this.props.post} />}
-        <CommentForm onSubmit={this.addComment} />
-        <div>
+      <div className={styles.PostDetail}>
+        <div className={styles.PostDetail__Post}>
+          {post && (
+            <Post
+              post={this.state.post}
+              onUpVote={this.upVotePost.bind(null, post.id)}
+              onDownVote={this.downVotePost.bind(null, post.id)}
+              onEdit={this.editPost.bind(null, post.id)}
+              onDelete={this.deletePost.bind(null, post.id)}
+            />
+          )}
+        </div>
+
+        <div className={styles.PostDetail__CommentForm}>
+          <CommentForm onSubmit={this.addComment} />
+        </div>
+
+        <div className={styles.PostDetail__CommentList}>
+          <h5 className={styles.PostDetail__CommentListHeader}>
+            {this.state.comments.length} Comments
+          </h5>
           {this.state.comments.map((comment) => (
             <Comment
               key={comment.id}

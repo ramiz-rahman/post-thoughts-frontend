@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import styles from './App.module.css';
 import Category from './containers/Category/Category';
-import PostForm from './components/PostForm/PostForm';
-import PostDetail from './components/PostDetail/PostDetail';
+import CreatePost from './containers/CreatePost/CreatePost';
+import PostDetail from './containers/PostDetail/PostDetail';
 
 class App extends Component {
   render() {
@@ -13,18 +13,14 @@ class App extends Component {
           <h1>Readable</h1>
         </header>
         <Switch>
-          <Route exact path="/posts/create" component={PostForm} />
-          <Route
-            exact
-            path="/posts/5"
-            render={() => (
-              <PostDetail
-                post={this.state.posts ? this.state.posts[0] : null}
-              />
-            )}
-          />
+          <Route exact path="/posts/new" component={CreatePost} />
+          <Route exact path="/posts/edit/:id" component={CreatePost} />
+          <Route exact path="/posts/:id" component={PostDetail} />
           <Route path="/category/:id" component={Category} />
-          <Route exact path="/" component={Category} />
+          <Route
+            path="/"
+            render={(routeProps) => <Redirect to="/category/all" />}
+          />
         </Switch>
       </div>
     );

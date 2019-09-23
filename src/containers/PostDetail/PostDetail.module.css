@@ -1,0 +1,23 @@
+.PostDetail {
+  width: 90%;
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 1366px;
+  padding: 16px;
+}
+
+.PostDetail__CommentForm {
+  margin-top: 32px;
+}
+
+.PostDetail__CommentList {
+  margin-top: 8px;
+}
+
+.PostDetail__CommentListHeader {
+  padding: 8px 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.PostDetail__Post {
+}

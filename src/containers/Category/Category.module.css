@@ -6,9 +6,13 @@
 }
 
 .Category__Sort {
-  width: 50%;
+  width: 70%;
   min-width: 320px;
   margin: 3rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Category__Post {

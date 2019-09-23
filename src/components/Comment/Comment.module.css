@@ -7,7 +7,7 @@
   grid-template-columns: 40px auto;
   grid-template-areas: 'aside header' 'aside body' 'aside footer';
   border-radius: 4px;
-  max-width: 512px;
+  min-width: 320px;
   align-items: center;
   margin: 20px;
 }

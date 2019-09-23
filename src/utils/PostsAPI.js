@@ -68,7 +68,7 @@ export const createPost = (post) => {
 USAGE:
   Get the details of a single post */
 export const getPost = (postId) => {
-  fetch(`${api}/posts/${postId}`, { headers })
+  return fetch(`${api}/posts/${postId}`, { headers })
     .then((res) => res.json())
     .then((post) => post);
 };

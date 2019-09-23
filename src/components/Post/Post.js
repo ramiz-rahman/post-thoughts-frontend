@@ -7,7 +7,14 @@ import EditButton from '../UI/EditButton/EditButton';
 import DeleteButton from '../UI/DeleteButton/DeleteButton';
 
 function Post(props) {
-  const { post, onUpVote, onDownVote, onEdit, onDelete } = props;
+  const {
+    post,
+    onUpVote,
+    onDownVote,
+    onEdit,
+    onDelete,
+    onViewDetail
+  } = props;
   const {
     category,
     author,
@@ -33,7 +40,7 @@ function Post(props) {
         </div>
       </header>
 
-      <article className={styles.Post__Body}>
+      <article className={styles.Post__Body} onClick={onViewDetail}>
         <h3 className={styles.Post__Title}>{title}</h3>
         <p>{body}</p>
       </article>
@@ -47,7 +54,7 @@ function Post(props) {
       </aside>
 
       <footer className={styles.Post__Footer}>
-        <span>{commentCount} Comments</span>
+        <span onClick={onViewDetail}>{commentCount} Comments</span>
       </footer>
     </div>
   );
@@ -56,7 +63,10 @@ function Post(props) {
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   onUpVote: PropTypes.func.isRequired,
-  onDownVote: PropTypes.func.isRequired
+  onDownVote: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  OnViewDetail: PropTypes.func
 };
 
 export default Post;
