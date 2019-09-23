@@ -2,7 +2,7 @@
   min-width: 200px;
   cursor: pointer;
   position: relative;
-  text-transform: lowercase;
+  /* text-transform: lowercase; */
 }
 
 .Selector_listOpen {
@@ -13,8 +13,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 56px;
-  padding: 1rem;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0.5rem;
+}
+
+.Selector__Placeholder {
+  color: #666;
 }
 
 .Selector__Icon {

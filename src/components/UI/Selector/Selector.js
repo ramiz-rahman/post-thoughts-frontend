@@ -36,7 +36,13 @@ class Selector extends Component {
         <Backdrop show={this.state.open} onClick={this.close} />
         <div className={modifiers} onClick={this.toggle}>
           <div className={styles.Selector__Header}>
-            <div>{this.props.selected}</div>
+            {this.props.selected ? (
+              <div>{this.props.selected}</div>
+            ) : (
+              <div className={styles.Selector__Placeholder}>
+                {this.props.placeholder}
+              </div>
+            )}
             <Icon className={styles.Selector__Icon} />
           </div>
           <SelectorList
@@ -53,6 +59,7 @@ class Selector extends Component {
 Selector.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
   selected: PropTypes.string,
+  placeholder: PropTypes.string,
   onSelect: PropTypes.func.isRequired
 };
 
