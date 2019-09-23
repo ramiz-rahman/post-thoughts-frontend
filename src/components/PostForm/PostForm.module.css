@@ -7,4 +7,30 @@
 .PostForm__Field {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
+}
+
+.PostForm__CategorySelector {
+  min-width: 320px;
+  width: 40%;
+  border: 1px solid #e6e6e6;
+}
+
+.PostForm__Label {
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.PostForm__Input {
+  padding: 0.5rem;
+  border: 1px solid #e6e6e6;
+}
+
+.PostForm__Body {
+  composes: PostForm__Input;
+  height: 136px;
+}
+
+.PostForm__Input::placeholder {
+  color: #666;
 }
