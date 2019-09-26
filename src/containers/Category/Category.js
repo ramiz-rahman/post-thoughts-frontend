@@ -158,14 +158,7 @@ class Category extends Component {
             const post = this.props.posts[postId];
             return (
               <div className={styles.Category__Post} key={post.id}>
-                <Post
-                  post={post}
-                  onUpVote={this.upVotePost.bind(null, post.id)}
-                  onDownVote={this.downVotePost.bind(null, post.id)}
-                  onEdit={this.editPost.bind(null, post.id)}
-                  onDelete={this.deletePost.bind(null, post.id)}
-                  onViewDetail={this.viewDetail.bind(null, post.id)}
-                />
+                <Post id={post.id} />
               </div>
             );
           })}

@@ -1,72 +1,106 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import styles from './Post.module.css';
+
+// Utilities
+import moment from 'moment';
+
+// Redux Connection
+import { connect } from 'react-redux';
+import * as actionCreators from '../../actions';
+
+// React-Router connection
+import { withRouter } from 'react-router';
+
+// Sub components
 import Voter from '../Voter/Voter';
 import EditButton from '../UI/EditButton/EditButton';
 import DeleteButton from '../UI/DeleteButton/DeleteButton';
 
 function Post(props) {
-  const {
-    post,
-    onUpVote,
-    onDownVote,
-    onEdit,
-    onDelete,
-    onViewDetail
-  } = props;
-  const {
-    category,
-    author,
-    timestamp,
-    title,
-    body,
-    voteScore,
-    commentCount
-  } = post;
+  const { id, post, upVotePost, downVotePost, deletePost } = props;
 
-  return (
-    <div className={styles.Post}>
-      <header className={styles.Post__Header}>
-        <div>
-          <span className={styles.Post__Category}>{category}</span>
-          <span>|</span>
-          <span>posted by {author}</span>
-          <span>{moment(timestamp).calendar()}</span>
-        </div>
-        <div>
-          <EditButton onClick={onEdit} />
-          <DeleteButton onClick={onDelete} />
-        </div>
-      </header>
+  // Redirection functions
+  const redirectToPostFormPage = () => {
+    props.history.push(`/posts/edit/${id}`);
+  };
+  const redirectToPostDetailsPage = () => {
+    props.history.push(`/posts/${id}`);
+  };
 
-      <article className={styles.Post__Body} onClick={onViewDetail}>
-        <h3 className={styles.Post__Title}>{title}</h3>
-        <p>{body}</p>
-      </article>
-
-      <aside className={styles.Post__Aside}>
-        <Voter
-          voteScore={voteScore}
-          onUpVote={onUpVote}
-          onDownVote={onDownVote}
-        />
-      </aside>
-
-      <footer className={styles.Post__Footer}>
-        <span onClick={onViewDetail}>{commentCount} Comments</span>
-      </footer>
-    </div>
+  // Sub components of post
+  const PostHeader = ({ category, author, timestamp }) => (
+    <header className={styles.Post__Header}>
+      <div>
+        <span className={styles.Post__Category}>{category}</span>
+        <span>|</span>
+        <span>posted by {author}</span>
+        <span>{moment(timestamp).calendar()}</span>
+      </div>
+      <div>
+        <EditButton onClick={redirectToPostFormPage} />
+        <DeleteButton onClick={deletePost.bind(null, id)} />
+      </div>
+    </header>
   );
+
+  const PostBody = ({ title, body }) => (
+    <article
+      className={styles.Post__Body}
+      onClick={redirectToPostDetailsPage}
+    >
+      <h3 className={styles.Post__Title}>{title}</h3>
+      <p>{body}</p>
+    </article>
+  );
+
+  const PostAside = ({ voteScore }) => (
+    <aside className={styles.Post__Aside}>
+      <Voter
+        voteScore={voteScore}
+        onUpVote={upVotePost.bind(null, id)}
+        onDownVote={downVotePost.bind(null, id)}
+      />
+    </aside>
+  );
+
+  const PostFooter = ({ commentCount }) => (
+    <footer className={styles.Post__Footer}>
+      <span onClick={redirectToPostDetailsPage}>
+        {commentCount} Comments
+      </span>
+    </footer>
+  );
+
+  if (post) {
+    return (
+      <div className={styles.Post}>
+        <PostHeader {...post} />
+        <PostBody {...post} />
+        <PostAside {...post} />
+        <PostFooter {...post} />
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 Post.propTypes = {
-  post: PropTypes.object.isRequired,
-  onUpVote: PropTypes.func.isRequired,
-  onDownVote: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  OnViewDetail: PropTypes.func
+  id: PropTypes.string.isRequired
 };
 
-export default Post;
+const mapStateToProps = (state, ownProps) => ({
+  post: state.posts[ownProps.id]
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  upVotePost: (id) => dispatch(actionCreators.upVotePost(id)),
+  downVotePost: (id) => dispatch(actionCreators.downVotePost(id)),
+  deletePost: (id) => dispatch(actionCreators.deletePost(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Post));

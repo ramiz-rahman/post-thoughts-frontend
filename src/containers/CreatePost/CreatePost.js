@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../actions';
 import styles from './CreatePost.module.css';
 import PostForm from '../../components/PostForm/PostForm';
 import * as API from '../../utils/PostsAPI';
@@ -11,12 +13,17 @@ class CreatePost extends Component {
     categories: []
   };
 
-  componentDidMount() {
-    API.getCategories().then((categories) =>
+  async componentDidMount() {
+    await this.props.getCategories();
+    let categories = this.props.categories;
+    this.setState({
+      categories: categories.map((category) => category.name)
+    });
+    /* API.getCategories().then((categories) =>
       this.setState({
         categories: categories.map((category) => category.name)
       })
-    );
+    ); */
     const postId = this.props.match.params.id;
     const editing = this.props.match.path.includes('edit');
     if (editing && postId) {
@@ -28,7 +35,8 @@ class CreatePost extends Component {
 
   createPost = ({ category, author, title, body }, e) => {
     e.preventDefault();
-    const post = {
+    this.props.addPost(category, author, title, body);
+    /*   const post = {
       category,
       author,
       title,
@@ -37,12 +45,14 @@ class CreatePost extends Component {
       id: uuidv5('ramiz')
     };
     API.createPost(post);
+     */
     this.props.history.push('/category/all');
   };
 
   editPost = (id, { title, body }, e) => {
     e.preventDefault();
-    API.updatePost(id, title, body);
+    this.props.editPost(id, title, body);
+    // API.updatePost(id, title, body);
     this.props.history.push('/category/all');
   };
 
@@ -64,4 +74,19 @@ class CreatePost extends Component {
   }
 }
 
-export default CreatePost;
+const mapStateToProps = (state) => ({
+  categories: state.categories
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCategories: () => dispatch(actionCreators.getCategories()),
+  addPost: (category, title, author, body) =>
+    dispatch(actionCreators.addPost({ category, author, title, body })),
+  editPost: (id, title, body) =>
+    dispatch(actionCreators.editPost({ id, title, body }))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreatePost);
