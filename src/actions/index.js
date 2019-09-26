@@ -2,9 +2,15 @@ import * as API from '../utils/PostsAPI';
 import * as actionTypes from './actionTypes';
 import uuidv5 from 'node-uuid';
 
-export const types = actionTypes;
+/* SYNC ACTION CREATORS (INTERNAL) */
 
-// Sync ActionCreators
+// Categories
+const retrieveCategories = (categories) => ({
+  type: actionTypes.GET_CATEGORIES,
+  payload: categories
+});
+
+// Posts
 const retrievePosts = (posts) => ({
   type: actionTypes.GET_ALL_POSTS,
   payload: posts
@@ -25,12 +31,41 @@ const removePost = (post) => ({
   payload: post
 });
 
-const retrieveCategories = (categories) => ({
-  type: actionTypes.GET_CATEGORIES,
-  payload: categories
+// Comments
+const readPostCommentsSuccess = (comments) => ({
+  type: actionTypes.GET_POST_COMMENTS,
+  payload: comments
 });
 
-// Async ActionCreators
+const createCommentSuccess = (comment) => ({
+  type: actionTypes.CREATE_COMMENT,
+  payload: comment
+});
+
+const updateCommentSuccess = (comment) => ({
+  type: actionTypes.UPDATE_COMMENT,
+  payload: comment
+});
+
+const deleteCommentSuccess = (comment) => ({
+  type: actionTypes.DELETE_COMMENT,
+  payload: comment
+});
+
+/* ASYNC ACTION CREATORS */
+
+// Categories
+export const getCategories = () => {
+  return async function(dispatch, getState) {
+    let categories = getState().categories;
+    if (!categories || categories.length === 0) {
+      categories = await API.getCategories();
+      dispatch(retrieveCategories(categories));
+    }
+  };
+};
+
+// Posts
 export const getAllPosts = () => {
   return async function(dispatch) {
     const posts = await API.getAllPosts();
@@ -77,13 +112,6 @@ export const editPost = ({ id, title, body }) => {
   };
 };
 
-export const deletePost = (id) => {
-  return async function(dispatch) {
-    const deletedPost = await API.deletePost(id);
-    dispatch(removePost(deletedPost));
-  };
-};
-
 export const upVotePost = (id) => {
   return async function(dispatch) {
     const option = { option: 'upVote' };
@@ -100,37 +128,68 @@ export const downVotePost = (id) => {
   };
 };
 
-export const getCategories = () => {
+export const deletePost = (id) => {
+  return async function(dispatch) {
+    const deletedPost = await API.deletePost(id);
+    dispatch(removePost(deletedPost));
+  };
+};
+
+// Comments
+export const getPostComments = (postId) => {
   return async function(dispatch, getState) {
-    let categories = getState().categories;
-    if (!categories || categories.length === 0) {
-      categories = await API.getCategories();
-      dispatch(retrieveCategories(categories));
+    let comments = getState().comments;
+    if (!comments) {
+      comments = await API.getPostComments(postId);
+      dispatch(readPostCommentsSuccess(comments));
     }
   };
 };
 
-// Synchronous Action Types and Action Creators
-export const FETCH_POSTS_BEGIN = 'FETCH_POSTS_BEGIN';
-export const fetchPostsBegin = () => ({
-  type: FETCH_POSTS_BEGIN
-});
+export const createComment = ({ author, body, postId }) => {
+  return async function(dispatch) {
+    let newComment = {
+      id: uuidv5('ramiz'),
+      parentId: postId,
+      timestamp: Date.now(),
+      author: author,
+      body: body
+    };
+    newComment = await API.addCommentToPost(newComment);
+    dispatch(createCommentSuccess(newComment));
+  };
+};
 
-export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
-export const fetchPostsSuccess = (posts) => ({
-  type: FETCH_POSTS_SUCCESS,
-  payload: { posts }
-});
+export const editComment = ({ id, body }) => {
+  return async function(dispatch) {
+    const timestamp = Date.now();
+    const updatedComment = await API.editComment(id, timestamp, body);
+    dispatch(updateCommentSuccess(updatedComment));
+  };
+};
 
-export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
-export const fetchPostsFailure = (error) => ({
-  type: FETCH_POSTS_FAILURE,
-  payload: error,
-  error: true
-});
+export const upVoteComment = (id) => {
+  return async function(dispatch) {
+    const option = { option: 'upVote' };
+    const updatedComment = await API.voteOnComment(id, option);
+    dispatch(updateCommentSuccess(updatedComment));
+  };
+};
 
-export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
-export const fetchPostSuccess = (post) => ({
-  type: FETCH_POST_SUCCESS,
-  payload: post
-});
+export const downVoteComment = (id) => {
+  return async function(dispatch) {
+    const option = { option: 'downVote' };
+    const updatedComment = await API.voteOnComment(id, option);
+    dispatch(updateCommentSuccess(updatedComment));
+  };
+};
+
+export const deleteComment = (id) => {
+  return async function(dispatch) {
+    const deletedComment = await API.deleteComment(id);
+    dispatch(deleteCommentSuccess(deletedComment));
+  };
+};
+
+/* Export Action Types */
+export const types = actionTypes;
