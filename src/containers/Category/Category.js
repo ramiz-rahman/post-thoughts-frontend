@@ -68,7 +68,7 @@ class Category extends Component {
     this.setState({ posts });
   };
 
-  voteOnPost = async (postId, vote, e) => {
+  /*   voteOnPost = async (postId, vote, e) => {
     e.preventDefault();
 
     const votedPost = await API.voteOnPost(postId, {
@@ -91,13 +91,13 @@ class Category extends Component {
   upVotePost = async (postId, e) => {
     e.preventDefault();
     this.props.upVotePost(postId);
-    //this.voteOnPost(postId, 'upVote', e);
+    this.voteOnPost(postId, 'upVote', e);
   };
 
   downVotePost = async (postId, e) => {
     e.preventDefault();
     this.props.downVotePost(postId);
-    // this.voteOnPost(postId, 'downVote', e);
+    this.voteOnPost(postId, 'downVote', e);
   };
 
   editPost = async (postId, e) => {
@@ -108,18 +108,18 @@ class Category extends Component {
   deletePost = async (postId, e) => {
     e.preventDefault();
     this.props.deletePost(postId);
-    /* const deletedPost = await API.deletePost(postId);
+    const deletedPost = await API.deletePost(postId);
     this.setState((prevState) => ({
       posts: prevState.posts.filter(
         (post) => post.id !== deletedPost.id
       )
-    })); */
+    }));
   };
 
   viewDetail = (postId, e) => {
     e.preventDefault();
     this.props.history.push(`/posts/${postId}`);
-  };
+  }; */
 
   _filterPosts = () => {
     return this.state.currentPath === 'all'
