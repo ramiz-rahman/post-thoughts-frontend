@@ -5,6 +5,8 @@ import CategoryNav from '../../components/CategoryNav/CategoryNav';
 import Sort from '../../components/Sort/Sort';
 import Post from '../../components/Post/Post';
 import * as API from '../../utils/PostsAPI';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class Category extends Component {
   state = {
@@ -20,6 +22,8 @@ class Category extends Component {
   };
 
   componentDidMount() {
+    this.props.getAllCategories();
+    this.props.getAllPosts();
     API.getCategories().then((categories) =>
       this.setState({ categories: categories })
     );
@@ -85,11 +89,15 @@ class Category extends Component {
   };
 
   upVotePost = async (postId, e) => {
-    this.voteOnPost(postId, 'upVote', e);
+    e.preventDefault();
+    this.props.upVotePost(postId);
+    //this.voteOnPost(postId, 'upVote', e);
   };
 
   downVotePost = async (postId, e) => {
-    this.voteOnPost(postId, 'downVote', e);
+    e.preventDefault();
+    this.props.downVotePost(postId);
+    // this.voteOnPost(postId, 'downVote', e);
   };
 
   editPost = async (postId, e) => {
@@ -99,12 +107,13 @@ class Category extends Component {
 
   deletePost = async (postId, e) => {
     e.preventDefault();
-    const deletedPost = await API.deletePost(postId);
+    this.props.deletePost(postId);
+    /* const deletedPost = await API.deletePost(postId);
     this.setState((prevState) => ({
       posts: prevState.posts.filter(
         (post) => post.id !== deletedPost.id
       )
-    }));
+    })); */
   };
 
   viewDetail = (postId, e) => {
@@ -121,6 +130,7 @@ class Category extends Component {
   };
 
   render() {
+    console.log(this.props.categories);
     const posts = this._filterPosts();
 
     return (
@@ -129,7 +139,7 @@ class Category extends Component {
           <CategoryNav
             categories={[
               { name: 'all', path: 'all' },
-              ...this.state.categories
+              ...this.props.categories
             ]}
             currentPath={this.state.currentPath}
           />
@@ -144,22 +154,41 @@ class Category extends Component {
         </section>
 
         <section>
-          {posts.map((post) => (
-            <div className={styles.Category__Post} key={post.id}>
-              <Post
-                post={post}
-                onUpVote={this.upVotePost.bind(null, post.id)}
-                onDownVote={this.downVotePost.bind(null, post.id)}
-                onEdit={this.editPost.bind(null, post.id)}
-                onDelete={this.deletePost.bind(null, post.id)}
-                onViewDetail={this.viewDetail.bind(null, post.id)}
-              />
-            </div>
-          ))}
+          {Object.keys(this.props.posts).map((postId) => {
+            const post = this.props.posts[postId];
+            return (
+              <div className={styles.Category__Post} key={post.id}>
+                <Post
+                  post={post}
+                  onUpVote={this.upVotePost.bind(null, post.id)}
+                  onDownVote={this.downVotePost.bind(null, post.id)}
+                  onEdit={this.editPost.bind(null, post.id)}
+                  onDelete={this.deletePost.bind(null, post.id)}
+                  onViewDetail={this.viewDetail.bind(null, post.id)}
+                />
+              </div>
+            );
+          })}
         </section>
       </div>
     );
   }
 }
 
-export default Category;
+const mapStateToProps = (state) => ({
+  categories: state.categories,
+  posts: state.posts
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getAllCategories: () => dispatch(actions.getCategories()),
+  getAllPosts: () => dispatch(actions.getAllPosts()),
+  upVotePost: (id) => dispatch(actions.upVotePost(id)),
+  downVotePost: (id) => dispatch(actions.downVotePost(id)),
+  deletePost: (id) => dispatch(actions.deletePost(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Category);
