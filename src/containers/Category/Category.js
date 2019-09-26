@@ -68,59 +68,6 @@ class Category extends Component {
     this.setState({ posts });
   };
 
-  /*   voteOnPost = async (postId, vote, e) => {
-    e.preventDefault();
-
-    const votedPost = await API.voteOnPost(postId, {
-      option: vote
-    });
-
-    const _updateIfNew = (post, newPost) => {
-      return post.id === newPost.id ? newPost : post;
-    };
-
-    const _updatePosts = (posts, newPost) => {
-      return posts.map((post) => _updateIfNew(post, newPost));
-    };
-
-    this.setState((prevState) => ({
-      posts: _updatePosts(prevState.posts, votedPost)
-    }));
-  };
-
-  upVotePost = async (postId, e) => {
-    e.preventDefault();
-    this.props.upVotePost(postId);
-    this.voteOnPost(postId, 'upVote', e);
-  };
-
-  downVotePost = async (postId, e) => {
-    e.preventDefault();
-    this.props.downVotePost(postId);
-    this.voteOnPost(postId, 'downVote', e);
-  };
-
-  editPost = async (postId, e) => {
-    e.preventDefault();
-    this.props.history.push(`/posts/edit/${postId}`);
-  };
-
-  deletePost = async (postId, e) => {
-    e.preventDefault();
-    this.props.deletePost(postId);
-    const deletedPost = await API.deletePost(postId);
-    this.setState((prevState) => ({
-      posts: prevState.posts.filter(
-        (post) => post.id !== deletedPost.id
-      )
-    }));
-  };
-
-  viewDetail = (postId, e) => {
-    e.preventDefault();
-    this.props.history.push(`/posts/${postId}`);
-  }; */
-
   _filterPosts = () => {
     return this.state.currentPath === 'all'
       ? this.state.posts
