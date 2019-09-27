@@ -1,6 +1,7 @@
 import { types as actionTypes } from '../actions';
 
-// Comments
+// SAMPLE OF STATE SLICE
+/* 
 const defaultComments = {
   '894tuq4ut84ut8v4t8wun89g': {
     id: '894tuq4ut84ut8v4t8wun89g',
@@ -22,7 +23,7 @@ const defaultComments = {
     deleted: false,
     parentDeleted: false
   }
-};
+}; */
 
 const addComments = (state, action) => {
   return { ...state, ...action.payload };

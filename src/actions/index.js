@@ -13,7 +13,7 @@ export const { getCategories } = categoriesActionCreators;
 export const {
   getAllPosts,
   getPost,
-  addPost,
+  createPost,
   editPost,
   upVotePost,
   downVotePost,

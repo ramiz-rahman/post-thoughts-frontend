@@ -1,6 +1,7 @@
 import { types as actionTypes } from '../actions';
 
-// Posts
+// SAMPLE OF STATE SLICE
+/* 
 const postsById = {
   '8xf0y6ziyjabvozdd253nd': {
     id: '8xf0y6ziyjabvozdd253nd',
@@ -25,7 +26,7 @@ const postsById = {
     deleted: false,
     commentCount: 0
   }
-};
+}; */
 
 const addAllPosts = (state, action) => {
   return { ...action.payload };
@@ -63,7 +64,7 @@ const postsReducer = (state = {}, action) => {
       return addAllPosts(state, action);
     case actionTypes.GET_POST:
       return addPost(state, action);
-    case actionTypes.EDIT_POST:
+    case actionTypes.UPDATE_POST:
       return updatePost(state, action);
     case actionTypes.DELETE_POST:
       return deletePost(state, action);

@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes.js';
 import * as API from '../utils/PostsAPI';
 
 /* SYNC ACTION CREATORS (INTERNAL) */
-const retrieveCategories = (categories) => ({
+const readAllCategoriesSuccess = (categories) => ({
   type: actionTypes.GET_CATEGORIES,
   payload: categories
 });
@@ -13,7 +13,7 @@ export const getCategories = () => {
     let categories = getState().categories;
     if (!categories || categories.length === 0) {
       categories = await API.getCategories();
-      dispatch(retrieveCategories(categories));
+      dispatch(readAllCategoriesSuccess(categories));
     }
   };
 };
