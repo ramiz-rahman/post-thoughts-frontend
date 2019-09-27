@@ -60,7 +60,7 @@ export const createPost = (post) => {
     },
     body: JSON.stringify(post)
   })
-    .then((res) => res.json)
+    .then((res) => res.json())
     .then((post) => post);
 };
 
