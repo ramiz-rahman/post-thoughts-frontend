@@ -80,13 +80,8 @@ export const getAllPosts = () => {
 
 export const getPost = (id) => {
   return async function(dispatch, getState) {
-    const posts = getState().posts;
-    if (!Object.keys(posts).includes(id)) {
-      const post = await API.getPost(id);
-      return dispatch(retrievePost(post));
-    } else {
-      return null;
-    }
+    const post = await API.getPost(id);
+    return dispatch(retrievePost(post));
   };
 };
 
@@ -137,12 +132,13 @@ export const deletePost = (id) => {
 
 // Comments
 export const getPostComments = (postId) => {
-  return async function(dispatch, getState) {
-    let comments = getState().comments;
-    if (!comments) {
-      comments = await API.getPostComments(postId);
-      dispatch(readPostCommentsSuccess(comments));
-    }
+  return async function(dispatch) {
+    const comments = await API.getPostComments(postId);
+    const commentsById = comments.reduce((commentsById, comment) => {
+      commentsById[comment.id] = comment;
+      return commentsById;
+    }, {});
+    dispatch(readPostCommentsSuccess(commentsById));
   };
 };
 
@@ -157,6 +153,7 @@ export const createComment = ({ author, body, postId }) => {
     };
     newComment = await API.addCommentToPost(newComment);
     dispatch(createCommentSuccess(newComment));
+    dispatch(getPost(postId));
   };
 };
 
@@ -188,6 +185,7 @@ export const deleteComment = (id) => {
   return async function(dispatch) {
     const deletedComment = await API.deleteComment(id);
     dispatch(deleteCommentSuccess(deletedComment));
+    dispatch(getPost(deletedComment.parentId));
   };
 };
 
