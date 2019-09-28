@@ -23,9 +23,17 @@ class PostForm extends Component {
 
   componentDidMount() {
     this.setState({
-      categories: this.props.categories,
-      editing: this.props.editing
+      categories: this.props.categories
     });
+
+    if (this.props.post && this.props.editing)
+      this.setState({
+        category: this.props.post.category,
+        author: this.props.post.author,
+        title: this.props.post.title,
+        body: this.props.post.body,
+        editing: true
+      });
   }
 
   componentDidUpdate() {
@@ -85,9 +93,9 @@ class PostForm extends Component {
     };
 
     if (this.state.editing) {
-      onEdit(post, e);
+      onEdit(post);
     } else {
-      onCreate(post, e);
+      onCreate(post);
     }
   };
 
