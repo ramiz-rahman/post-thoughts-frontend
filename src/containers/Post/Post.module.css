@@ -1,3 +1,5 @@
+@import '../../styles/colors.css';
+
 .Post {
   display: grid;
   grid-template-rows: minmax(36px, auto) minmax(64px, auto) minmax(
@@ -6,7 +8,7 @@
     );
   grid-template-columns: 40px auto;
   grid-template-areas: 'aside header' 'aside body' 'aside footer';
-  color: #333;
+  background-color: var(--white);
 }
 
 .Post__Header {
@@ -15,9 +17,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  color: #666;
   font-size: 0.875rem;
   padding: 8px;
+  color: var(--gray-400);
 }
 
 .Post__Header span {
@@ -26,22 +28,22 @@
 
 .Post__Category {
   font-weight: 700;
-  color: #de4d44;
+  color: var(--pink);
 }
 
 .Post__Aside {
   grid-area: aside;
   align-items: center;
-  border-right: 1px solid #e6e6e6;
-  background-color: #e6e6e6;
+  border-right: 5px solid var(--indigo);
   padding-top: 40px;
 }
 
 .Post__Body {
   grid-area: body;
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-100);
   padding: 8px;
+  cursor: pointer;
 }
 
 .Post__Title {
@@ -56,4 +58,24 @@
   color: #666;
   font-size: 0.875rem;
   padding: 8px;
+}
+
+.Post__Action {
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Post__Action:hover {
+  color: var(--blue);
+}
+
+.Post__ActionIcon {
+  font-size: 1.25rem;
+  padding-top: 2px;
+  padding-right: 4px;
 }

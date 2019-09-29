@@ -1,9 +1,12 @@
+@import '../../../styles/colors.css';
+
 .EditButton {
   padding: 4px;
   font-size: 1.5rem;
   cursor: pointer;
+  color: var(--blue);
 }
 
 .EditButton:hover {
-  color: #009499;
+  color: var(--blue-tint);
 }

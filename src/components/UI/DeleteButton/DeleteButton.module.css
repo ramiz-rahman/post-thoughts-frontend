@@ -1,9 +1,12 @@
+@import '../../../styles/colors.css';
+
 .DeleteButton {
   padding: 4px;
   font-size: 1.5rem;
   cursor: pointer;
+  color: var(--blue);
 }
 
 .DeleteButton:hover {
-  color: #de4d44;
+  color: var(--blue-tint);
 }

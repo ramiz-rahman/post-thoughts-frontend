@@ -4,6 +4,7 @@ import styles from './Post.module.css';
 
 // Utilities
 import moment from 'moment';
+import { MdModeComment as CommentIcon } from 'react-icons/md';
 
 // Redux Connection
 import { connect } from 'react-redux';
@@ -13,9 +14,9 @@ import * as actionCreators from '../../actions';
 import { withRouter } from 'react-router';
 
 // Sub components
-import Voter from '../Voter/Voter';
-import EditButton from '../UI/EditButton/EditButton';
-import DeleteButton from '../UI/DeleteButton/DeleteButton';
+import Voter from '../../components/Voter/Voter';
+import EditButton from '../../components/UI/EditButton/EditButton';
+import DeleteButton from '../../components/UI/DeleteButton/DeleteButton';
 
 function Post(props) {
   const { id, post, upVotePost, downVotePost, deletePost } = props;
@@ -66,9 +67,13 @@ function Post(props) {
 
   const PostFooter = ({ commentCount }) => (
     <footer className={styles.Post__Footer}>
-      <span onClick={redirectToPostDetailsPage}>
+      <button
+        onClick={redirectToPostDetailsPage}
+        className={styles.Post__Action}
+      >
+        <CommentIcon className={styles.Post__ActionIcon} />
         {commentCount} Comments
-      </span>
+      </button>
     </footer>
   );
 
