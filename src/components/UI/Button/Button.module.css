@@ -1,5 +1,6 @@
+@import '../../../styles/colors.css';
+
 .Button {
-  composes: bg-primary from '../../../styles/colors.css';
   border: none;
   outline: none;
   text-transform: uppercase;
@@ -9,6 +10,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 .Button:focus {
@@ -16,11 +19,86 @@
 }
 
 .Button:hover {
-  background-color: #de4d44;
-  color: white;
+  background-color: var(--blue-tint);
 }
 
 .Button__Icon {
-  font-size: 24px;
+  font-size: 1.5rem;
+  padding-right: 4px;
+}
+
+.Button__Text {
+  margin: 0 auto;
+}
+
+.Button_size_inline {
+  padding: 4px 4px;
+  background: none;
+  color: var(--blue);
+}
+
+.Button_size_inline:hover {
+  background: none;
+  color: var(--blue-tint);
+}
+
+.Button_size_inline .Button__Icon {
+  font-size: 1.25rem;
+  padding-right: 4px;
+}
+
+.Button_size_s {
+  padding: 4px 4px;
+}
+
+.Button_size_s .Button__Icon {
+  font-size: 1.25rem;
+  padding-right: 4px;
+}
+
+.Button_size_m {
+  padding: 8px 12px;
+}
+
+.Button_size_m .Button_Icon {
+  font-size: 1.5rem;
   padding-right: 8px;
+}
+
+.Button_size_l {
+  padding: 12px 20px;
+}
+
+.Button_size_l .Button_Icon {
+  font-size: 2rem;
+  padding-right: 8px;
+}
+
+.Button_size_block {
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.Button_color_success {
+  background-color: var(--green);
+}
+
+.Button_color_success:hover {
+  background-color: var(--green-tint);
+}
+
+.Button_color_warning {
+  background-color: var(--yellow);
+}
+
+.Button_color_warning:hover {
+  background-color: var(--yellow-tint);
+}
+
+.Button_color_danger {
+  background-color: var(--red);
+}
+
+.Button_color_danger:hover {
+  background-color: var(--red-tint);
 }
