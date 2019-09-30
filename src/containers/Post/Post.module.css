@@ -59,23 +59,3 @@
   font-size: 0.875rem;
   padding: 8px;
 }
-
-.Post__Action {
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.Post__Action:hover {
-  color: var(--blue);
-}
-
-.Post__ActionIcon {
-  font-size: 1.25rem;
-  padding-top: 2px;
-  padding-right: 4px;
-}

@@ -15,6 +15,7 @@ import { withRouter } from 'react-router';
 
 // Sub components
 import Voter from '../../components/Voter/Voter';
+import Button from '../../components/UI/Button/Button';
 import EditButton from '../../components/UI/EditButton/EditButton';
 import DeleteButton from '../../components/UI/DeleteButton/DeleteButton';
 
@@ -67,13 +68,13 @@ function Post(props) {
 
   const PostFooter = ({ commentCount }) => (
     <footer className={styles.Post__Footer}>
-      <button
+      <Button
         onClick={redirectToPostDetailsPage}
-        className={styles.Post__Action}
-      >
-        <CommentIcon className={styles.Post__ActionIcon} />
-        {commentCount} Comments
-      </button>
+        Icon={CommentIcon}
+        value={`${commentCount} Comments`}
+        size="inline"
+        customStyles={{ textTransform: 'capitalize' }}
+      />
     </footer>
   );
 
