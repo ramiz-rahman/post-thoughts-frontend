@@ -74,3 +74,12 @@ const postsReducer = (state = {}, action) => {
 };
 
 export default postsReducer;
+
+// Selector: Return a list of posts filtered by category
+export const getFilteredPostList = (state, filter) => {
+  let postList = Object.keys(state).map((postId) => state[postId]);
+  if (!filter || filter !== 'all') {
+    postList = postList.filter((post) => post.category === filter);
+  }
+  return postList;
+};

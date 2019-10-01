@@ -1,5 +1,5 @@
 import categoriesReducer from './categoriesReducer';
-import postsReducer from './postsReducer';
+import postsReducer, * as fromPosts from './postsReducer';
 import commentsReducer from './commentsReducer';
 import { combineReducers } from 'redux';
 
@@ -10,3 +10,5 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+export const getFilteredPostList = (state, filter) =>
+  fromPosts.getFilteredPostList(state.posts, filter);
