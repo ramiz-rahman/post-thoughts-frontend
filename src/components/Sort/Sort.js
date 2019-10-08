@@ -1,40 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MdSort as Icon } from 'react-icons/md';
 import Selector from '../UI/Selector/Selector';
 import styles from './Sort.module.css';
 
-class Sort extends Component {
-  state = {
-    selected: ''
-  };
-
-  handleSelect = (e, option) => {
-    e.preventDefault();
-    this.setState(() => ({
-      selected: option
-    }));
-    this.props.onSort(option);
-  };
-
-  render() {
-    return (
-      <div className={styles.Sort}>
-        <div className={styles.Sort__Label}>
-          <Icon className={styles.Sort__Icon} />
-          <span>Sort By</span>
-        </div>
-
-        <Selector
-          selected={this.state.selected}
-          placeholder="Default"
-          options={this.props.options}
-          onSelect={this.handleSelect}
-        />
+const Sort = ({ selected, options, onSort }) => {
+  return (
+    <div className={styles.Sort}>
+      <div className={styles.Sort__Label}>
+        <Icon className={styles.Sort__Icon} />
+        <span>Sort By</span>
       </div>
-    );
-  }
-}
+
+      <Selector
+        selected={selected}
+        placeholder="Default"
+        options={options}
+        onSelect={onSort}
+      />
+    </div>
+  );
+};
 
 Sort.propTypes = {
   options: PropTypes.array.isRequired,

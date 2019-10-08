@@ -25,11 +25,15 @@ class ActionBar extends Component {
     ]
   };
 
-  handleSort = (order) => {
+  handleSort = (e, order) => {
+    e.preventDefault();
     this.props.history.push(`?sortBy=${order}`);
   };
 
   render() {
+    const currentSortOrder = new URLSearchParams(
+      this.props.location.search
+    ).get('sortBy');
     return (
       <div className={styles.ActionBar}>
         <nav className={styles.ActionBar__Filter}>
@@ -45,6 +49,7 @@ class ActionBar extends Component {
           <Sort
             options={this.state.sortOrders}
             onSort={this.handleSort}
+            selected={currentSortOrder}
           />
         </section>
         <Button

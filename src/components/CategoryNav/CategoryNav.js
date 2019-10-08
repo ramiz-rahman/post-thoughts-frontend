@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import styles from './CategoryNav.module.css';
 
-function CategoryNav({ categories = {}, currentPath }) {
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
+function CategoryNav({ categories = {}, currentPath, location }) {
   const createCategoryItem = (category) => {
     let itemStyle = `${styles.CategoryNav__Item}`;
     if (category.path === currentPath)
@@ -14,7 +16,10 @@ function CategoryNav({ categories = {}, currentPath }) {
       <Link
         key={category.path}
         className={itemStyle}
-        to={`/category/${category.path}`}
+        to={{
+          pathname: `/category/${category.path}`,
+          search: location.search
+        }}
       >
         {category.name}
       </Link>
@@ -35,4 +40,4 @@ CategoryNav.propTypes = {
   currentPath: PropTypes.string.isRequired
 };
 
-export default CategoryNav;
+export default withRouter(CategoryNav);
