@@ -14,7 +14,7 @@ class Sort extends Component {
     this.setState(() => ({
       selected: option
     }));
-    this.props.onSort(e, option);
+    this.props.onSort(option);
   };
 
   render() {
@@ -37,7 +37,7 @@ class Sort extends Component {
 }
 
 Sort.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.array.isRequired,
   onSort: PropTypes.func.isRequired
 };
 

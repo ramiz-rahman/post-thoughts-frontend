@@ -1,8 +1,9 @@
+@import '../../../styles/colors.css';
+
 .Selector {
-  min-width: 200px;
+  min-width: 12rem;
   cursor: pointer;
   position: relative;
-  /* text-transform: lowercase; */
 }
 
 .Selector_listOpen {
@@ -14,12 +15,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
+  height: 2.5rem;
   padding: 0.5rem;
 }
 
 .Selector__Placeholder {
-  color: #666;
+  color: var(--gray-800);
 }
 
 .Selector__Icon {
@@ -32,26 +33,35 @@
   top: 100%;
   left: 0;
   right: 0;
-  background-color: white;
-  border-right: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
-  border-left: 1px solid #e6e6e6;
-  list-style: none;
+
+  max-height: 80vh;
+  border: 1px solid var(--gray-100);
+  border-top: none;
   padding: 0;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(10px);
+  list-style: none;
 }
 
 .Selector__ListItem {
-  border-bottom: 1px solid #e6e6e6;
-  padding: 18px 16px;
+  border-bottom: 1px solid var(--gray-100);
+  padding: 0.75rem;
 }
 
 .Selector__ListItem:hover {
-  color: #fa7268;
+  color: var(--white);
+  background-color: var(--teal);
 }
 
 .Selector__ListItem:last-of-type {
   border: none;
+}
+
+.Selector__ListIcon {
+  padding-right: 1rem;
 }

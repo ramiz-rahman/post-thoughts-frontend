@@ -26,15 +26,19 @@ class Selector extends Component {
 
   render() {
     const Icon = this.state.open ? AngleUp : AngleDown;
-    let modifiers = `${styles.Selector}`;
+
+    let enhancedSelector = `${styles.Selector}`;
     if (this.state.open) {
-      modifiers = modifiers.concat(` ${styles.Selector_listOpen}`);
+      enhancedSelector = enhancedSelector.concat(
+        ` ${styles.Selector_listOpen}`
+      );
     }
 
     return (
       <div className={styles.SelectorWrapper}>
         <Backdrop show={this.state.open} onClick={this.close} />
-        <div className={modifiers} onClick={this.toggle}>
+
+        <div className={enhancedSelector} onClick={this.toggle}>
           <div className={styles.Selector__Header}>
             {this.props.selected ? (
               <div>{this.props.selected}</div>
@@ -45,6 +49,7 @@ class Selector extends Component {
             )}
             <Icon className={styles.Selector__Icon} />
           </div>
+
           <SelectorList
             open={this.state.open}
             options={this.props.options}
@@ -57,7 +62,7 @@ class Selector extends Component {
 }
 
 Selector.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.array,
   selected: PropTypes.string,
   placeholder: PropTypes.string,
   onSelect: PropTypes.func.isRequired
@@ -70,13 +75,19 @@ function SelectorList(props) {
     return (
       <ul className={styles.Selector__List}>
         {options.map((option) => {
+          const { Icon, text } = option;
           return (
             <li
-              key={option}
+              key={text}
               className={styles.Selector__ListItem}
-              onClick={(e) => onClick(e, option)}
+              onClick={(e) => onClick(e, text)}
             >
-              {option}
+              <span className={styles.Selector__ListIcon}>
+                {Icon ? Icon() : null}
+              </span>
+              <span className={styles.Selector__ListText}>
+                {text ? text : null}
+              </span>
             </li>
           );
         })}
@@ -88,7 +99,7 @@ function SelectorList(props) {
 }
 
 SelectorList.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.array,
   open: PropTypes.bool,
   onClick: PropTypes.func
 };
