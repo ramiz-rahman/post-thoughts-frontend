@@ -1,0 +1,34 @@
+.ActionBar {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem;
+}
+
+.ActionBar__Filter {
+  border: 1px solid var(--gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ActionBar__Sort {
+  border: 1px solid var(--gray-100);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .ActionBar {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+  }
+
+  .ActionBar__Filter {
+    margin-bottom: 0.5rem;
+  }
+
+  .ActionBar__Sort {
+    margin-bottom: 0.5rem;
+  }
+}
