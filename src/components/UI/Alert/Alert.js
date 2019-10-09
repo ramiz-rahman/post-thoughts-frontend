@@ -1,14 +1,12 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './Alert.module.css';
 
 import Button from '../Button/Button';
-import Backdrop from '../Backdrop/Backdrop';
 
 const Alert = ({ title, body, confirmText, onConfirm, onCancel }) => {
   return (
     <div className={styles.Alert} onClick={onCancel}>
-      {/* <Backdrop show opaque dark onClick={onCancel} /> */}
       <div className={styles.Alert__Content}>
         <h5>{title}</h5>
         <p>{body}</p>
@@ -26,4 +24,11 @@ const Alert = ({ title, body, confirmText, onConfirm, onCancel }) => {
   );
 };
 
+Alert.propTypes = {
+  title: PropTypes.string,
+  body: PropTypes.string,
+  confirmText: PropTypes.string,
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
+};
 export default Alert;
