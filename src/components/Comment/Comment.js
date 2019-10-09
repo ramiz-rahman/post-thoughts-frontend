@@ -1,13 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import moment from 'moment';
-import Voter from '../Voter/Voter';
 import PropTypes from 'prop-types';
 import styles from './Comment.module.css';
+
+// Utils
+import moment from 'moment';
+
+// Sub components
+import Voter from '../Voter/Voter';
+import Alert from '../UI/Alert/Alert';
 
 class Comment extends Component {
   state = {
     isEditing: false,
-    body: ''
+    body: '',
+    showAlert: false
   };
 
   componentDidMount() {
@@ -37,12 +43,26 @@ class Comment extends Component {
     this.setState({ isEditing: false, body: this.props.comment.body });
   };
 
+  handleDelete = (e) => {
+    e.preventDefault();
+    this.setState({ showAlert: true });
+  };
+
   render() {
     const { comment, onUpVote, onDownVote, onDelete } = this.props;
     const { timestamp, author, voteScore } = comment;
 
     return (
       <div className={styles.Comment}>
+        {this.state.showAlert ? (
+          <Alert
+            title="Are you sure you wish to delete this comment?"
+            body="This cannot be undone."
+            confirmText="Delete"
+            onCancel={() => this.setState({ showAlert: false })}
+            onConfirm={onDelete}
+          />
+        ) : null}
         <CommentHeader author={author} timestamp={timestamp} />
         <CommentAside
           voteScore={voteScore}
@@ -59,7 +79,7 @@ class Comment extends Component {
           onEdit={this.handleEdit}
           onEditSave={this.handleEditSave}
           onEditCancel={this.handleEditCancel}
-          onDelete={onDelete}
+          onDelete={this.handleDelete}
         />
       </div>
     );
