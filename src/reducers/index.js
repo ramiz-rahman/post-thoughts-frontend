@@ -1,12 +1,14 @@
 import categoriesReducer from './categoriesReducer';
 import postsReducer, * as fromPosts from './postsReducer';
 import commentsReducer from './commentsReducer';
+import uiReducer from './uiReducers';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
   posts: postsReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
+  notification: uiReducer
 });
 
 export default rootReducer;

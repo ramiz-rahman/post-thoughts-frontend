@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import * as categoriesActionCreators from './categoriesAction';
 import * as postsActionCreators from './postsActions';
 import * as commentsActionCreators from './commentsActions';
+import * as uiActionCreators from './uiActions';
 
 /* Export Action Types */
 export const types = actionTypes;
@@ -29,3 +30,6 @@ export const {
   downVoteComment,
   deleteComment
 } = commentsActionCreators;
+
+/* Export Action Creators for modifying UI */
+export const { setNotification, clearNotification } = uiActionCreators;
