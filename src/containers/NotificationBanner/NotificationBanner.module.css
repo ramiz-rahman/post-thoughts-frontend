@@ -1,0 +1,33 @@
+.NotificationBanner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--blue-50);
+}
+
+.NotificationBanner__CloseIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.NotificationBanner_color_success {
+  background-color: var(--green-50);
+}
+
+.NotificationBanner_color_warning {
+  background-color: var(--yellow-50);
+}
+
+.NotificationBanner_color_danger {
+  background-color: var(--red-50);
+}
+
+.NotificationBanner_hidden {
+  display: none;
+}
