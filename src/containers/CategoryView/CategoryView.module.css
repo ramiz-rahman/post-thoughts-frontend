@@ -1,0 +1,56 @@
+@import '../../styles/colors.css';
+
+.CategoryView {
+}
+
+.CategoryView__NavigationBarContainer {
+  position: sticky;
+  top: 0;
+  padding-left: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.CategoryView__NavigationBar {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.CategoryView__NavigationBar_hidden {
+  display: none;
+}
+
+.CategoryView__MenuButton {
+  font-size: 2rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: none;
+}
+
+.CategoryView__MenuButton:focus {
+  outline: none;
+}
+
+@media (min-width: 769px) {
+  .CategoryView__MenuButton {
+    display: none;
+  }
+
+  .CategoryView__NavigationBar_hidden {
+    display: block;
+  }
+}
+
+.CategoryView__PostList {
+  padding: 1.5rem 1rem;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.CategoryView__Post {
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 2px 0 var(--gray-600);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
