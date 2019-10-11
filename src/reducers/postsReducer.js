@@ -30,11 +30,14 @@ const posts = {
       commentCount: 0
     }
   }
-  allId: ['8xf0y6ziyjabvozdd253nd', '6ni6ok3ym7mf1p33lnez'];
+  allIds: ['8xf0y6ziyjabvozdd253nd', '6ni6ok3ym7mf1p33lnez'];
 }
 }; */
 
-const postsReducer = combineReducers({ byId, allIds });
+const postsReducer = combineReducers({
+  byId,
+  allIds
+});
 
 export default postsReducer;
 

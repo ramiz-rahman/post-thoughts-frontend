@@ -9,20 +9,6 @@ const addOrUpdatePost = (state, action) => {
   return { ...state, [id]: { ...action.payload } };
 };
 
-/* const addPost = (state, action) => {
-    const { payload } = action;
-    const { id } = payload;
-    const newPost = { [id]: payload };
-    return { ...state, ...newPost };
-  };
-  
-  const updatePost = (state, action) => {
-    const { payload } = action;
-    const { id } = payload;
-    const post = state[id];
-    return { ...state, [post.id]: { ...payload } };
-  }; */
-
 const deletePost = (state, action) => {
   const { id } = action.payload;
   const newState = Object.keys(state).reduce((object, key) => {
