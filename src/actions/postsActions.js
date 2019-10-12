@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes.js';
+import { setNotification } from './uiActions';
 import * as API from '../utils/PostsAPI';
 import uuidv5 from 'node-uuid';
 
@@ -55,6 +56,9 @@ export const createPost = ({ category, author, title, body }) => {
     };
     const createdPost = await API.createPost(post);
     dispatch(readPostSuccess(createdPost));
+    dispatch(
+      setNotification(`Post has been created by ${author}`, 'success')
+    );
   };
 };
 
@@ -62,6 +66,12 @@ export const editPost = ({ id, title, body }) => {
   return async function(dispatch) {
     const updatedPost = await API.updatePost(id, title, body);
     dispatch(updatePostSuccess(updatedPost));
+    dispatch(
+      setNotification(
+        `Post has been updated by ${updatedPost.author}`,
+        'warning'
+      )
+    );
   };
 };
 
@@ -85,5 +95,11 @@ export const deletePost = (id) => {
   return async function(dispatch) {
     const deletedPost = await API.deletePost(id);
     dispatch(deletePostSuccess(deletedPost));
+    dispatch(
+      setNotification(
+        `Post has been deleted by ${deletedPost.author}`,
+        'danger'
+      )
+    );
   };
 };
