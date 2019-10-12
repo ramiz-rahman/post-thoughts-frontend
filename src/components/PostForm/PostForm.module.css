@@ -1,3 +1,5 @@
+@import '../../styles/colors.css';
+
 .PostForm {
   display: flex;
   flex-direction: column;
@@ -13,7 +15,8 @@
 .PostForm__CategorySelector {
   min-width: 320px;
   width: 40%;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--gray-300);
+  background-color: var(--white);
 }
 
 .PostForm__Label {
@@ -23,14 +26,14 @@
 
 .PostForm__Input {
   padding: 0.5rem;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--gray-300);
 }
 
 .PostForm__Body {
   composes: PostForm__Input;
-  height: 136px;
+  height: 10rem;
 }
 
-.PostForm__Input::placeholder {
-  color: #666;
+.PostForm__Footer {
+  margin-top: 1rem;
 }

@@ -1,5 +1,10 @@
+@import '../../styles/colors.css';
+
 .PostFormContainer {
   min-width: 320px;
-  margin: 2rem auto;
-  width: 80%;
+  max-width: 1140px;
+  background-color: var(--white-a7);
+  backdrop-filter: var(--brighten-n-blur);
+  padding: 1rem;
+  margin: 1.5rem auto;
 }

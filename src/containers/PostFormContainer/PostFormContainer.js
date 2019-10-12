@@ -13,7 +13,9 @@ class PostFormContainer extends Component {
     return (
       <div className={styles.PostFormContainer}>
         <PostForm
-          categories={this.props.categories}
+          categories={this.props.categories.map((category) => ({
+            text: category
+          }))}
           onCreate={this.props.createPost}
           onEdit={this.props.editPost}
           editing={this.props.editing}
@@ -30,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     categories: state.categories.map((category) => category.name),
-    post: postId ? state.posts[postId] : null,
+    post: postId ? state.posts.byId[postId] : null,
     editing
   };
 };

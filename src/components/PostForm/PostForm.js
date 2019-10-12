@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Selector from '../UI/Selector/Selector';
 import styles from './PostForm.module.css';
+
+// Sub components
+import Selector from '../UI/Selector/Selector';
+import Button from '../UI/Button/Button';
 
 class PostForm extends Component {
   static propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    categories: PropTypes.array.isRequired,
     editing: PropTypes.bool,
     post: PropTypes.object,
     onEdit: PropTypes.func,
@@ -148,7 +151,7 @@ function CategorySelector({ categories, selected, onSelect }) {
   );
 }
 CategorySelector.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  categories: PropTypes.array.isRequired,
   selected: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired
 };
@@ -202,7 +205,11 @@ PostBodyField.propTypes = {
 // Submit Button
 function SubmitButton({ editStatus }) {
   const text = editStatus ? 'Edit' : 'Create';
-  return <button>{text}</button>;
+  return (
+    <div className={styles.PostForm__Footer}>
+      <Button value={text} size="block" color="success" />
+    </div>
+  );
 }
 
 export default PostForm;
