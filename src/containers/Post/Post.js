@@ -32,7 +32,10 @@ const PostHeader = ({
     <div>
       <span className={styles.Post__Category}>{category}</span>
       <span>|</span>
-      <span>posted by {author}</span>
+      <span>
+        posted by <em>{author}</em>
+      </span>
+      <span>•</span>
       <span>{moment(timestamp).calendar()}</span>
     </div>
     <div>
@@ -44,7 +47,7 @@ const PostHeader = ({
 
 const PostBody = ({ title, body, onClick }) => (
   <article className={styles.Post__Body} onClick={onClick}>
-    <h3 className={styles.Post__Title}>{title}</h3>
+    <h4 className={styles.Post__Title}>{title}</h4>
     <p>{body}</p>
   </article>
 );
@@ -79,6 +82,7 @@ class Post extends Component {
   askConfirmation = () => {
     this.setState({ showAlert: true });
   };
+
   // Redirection functions
   redirectToPostFormPage = () => {
     this.props.history.push(`/posts/edit/${this.props.id}`);
