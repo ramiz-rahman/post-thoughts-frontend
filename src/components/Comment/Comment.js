@@ -8,6 +8,7 @@ import moment from 'moment';
 // Sub components
 import Voter from '../Voter/Voter';
 import Alert from '../UI/Alert/Alert';
+import Button from '../UI/Button/Button';
 
 class Comment extends Component {
   state = {
@@ -100,7 +101,7 @@ Comment.propTypes = {
 function CommentHeader({ author, timestamp }) {
   return (
     <header className={styles.Comment__Header}>
-      <span>{author}</span>
+      <em>{author}</em>
       <span>{moment(timestamp).calendar()}</span>
     </header>
   );
@@ -146,6 +147,7 @@ function CommentBody({ isEditing = false, body, onChange }) {
           placeholder="What are your thoughts?"
           value={body}
           onChange={onChange}
+          className={styles.Comment__TextInput}
         />
       ) : (
         body
@@ -170,21 +172,32 @@ function CommentFooter({
 }) {
   const actions = isEditing ? (
     <Fragment>
-      <button onClick={onEditSave} className={styles.Comment__Action}>
-        Save
-      </button>
-      <button onClick={onEditCancel} className={styles.Comment__Action}>
-        Cancel
-      </button>
+      <Button
+        onClick={onEditSave}
+        className={styles.Comment__Action}
+        value="Save"
+      />
+      <Button
+        onClick={onEditCancel}
+        className={styles.Comment__Action}
+        value="Cancel"
+        size="inline"
+      />
     </Fragment>
   ) : (
     <Fragment>
-      <button onClick={onEdit} className={styles.Comment__Action}>
-        Edit
-      </button>
-      <button onClick={onDelete} className={styles.Comment__Action}>
-        Delete
-      </button>
+      <Button
+        onClick={onEdit}
+        className={styles.Comment__Action}
+        value="Edit"
+        size="inline"
+      />
+      <Button
+        onClick={onDelete}
+        className={styles.Comment__Action}
+        size="inline"
+        value="Delete"
+      />
     </Fragment>
   );
   return <footer className={styles.Comment__Footer}>{actions}</footer>;

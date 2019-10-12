@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
 
 // Sub Components
-import Post from '../../components/Post/Post';
+import Post from '../Post/Post';
 import Comment from '../../components/Comment/Comment';
 import CommentForm from '../../components/CommentForm/CommentForm';
 
@@ -16,7 +16,6 @@ class PostDetail extends Component {
   }
 
   render() {
-    console.log(this.props);
     const post = this.props.post;
     return (
       <div className={styles.PostDetail}>
@@ -33,17 +32,25 @@ class PostDetail extends Component {
             {this.props.comments.length} Comments
           </h5>
           {this.props.comments.map((comment) => (
-            <Comment
-              key={comment.id}
-              comment={comment}
-              onUpVote={this.props.upVoteComment.bind(null, comment.id)}
-              onDownVote={this.props.downVoteComment.bind(
-                null,
-                comment.id
-              )}
-              onEdit={this.props.editComment.bind(null, comment.id)}
-              onDelete={this.props.deleteComment.bind(null, comment.id)}
-            />
+            <div class={styles.PostDetail__Comment}>
+              <Comment
+                key={comment.id}
+                comment={comment}
+                onUpVote={this.props.upVoteComment.bind(
+                  null,
+                  comment.id
+                )}
+                onDownVote={this.props.downVoteComment.bind(
+                  null,
+                  comment.id
+                )}
+                onEdit={this.props.editComment.bind(null, comment.id)}
+                onDelete={this.props.deleteComment.bind(
+                  null,
+                  comment.id
+                )}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -51,15 +58,18 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  post: state.posts[ownProps.match.params.id],
-  comments: Object.keys(state.comments)
-    .filter(
-      (commentId) =>
-        state.comments[commentId].parentId === ownProps.match.params.id
-    )
-    .map((commentId) => state.comments[commentId])
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    post: state.posts.byId[ownProps.match.params.id],
+    comments: Object.keys(state.comments)
+      .filter(
+        (commentId) =>
+          state.comments[commentId].parentId ===
+          ownProps.match.params.id
+      )
+      .map((commentId) => state.comments[commentId])
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const postId = ownProps.match.params.id;

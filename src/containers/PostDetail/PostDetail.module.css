@@ -1,22 +1,36 @@
+@import '../../styles/colors.css';
+
 .PostDetail {
-  width: 90%;
-  margin: 0 auto;
   min-width: 320px;
-  max-width: 1366px;
-  padding: 16px;
+  max-width: 1140px;
+  padding: 1.5rem 1rem;
+  margin: 0 auto;
+  /* background: var(--blue-500); */
 }
 
 .PostDetail__CommentForm {
-  margin-top: 32px;
+  margin-top: 2rem;
+  background-color: var(--white-a7);
+  backdrop-filter: var(--brighten-n-blur);
 }
 
 .PostDetail__CommentList {
-  margin-top: 8px;
+  margin-top: 2rem;
+  background-color: var(--white-a7);
+  backdrop-filter: var(--brighten-n-blur);
+  padding: 1rem;
+}
+
+.PostDetail__Comment {
+  background-color: var(--white-a5);
+  /* backdrop-filter: var(--brighten-n-blur); */
+  border: 1px solid var(--gray-300);
+  margin-top: 1rem;
 }
 
 .PostDetail__CommentListHeader {
-  padding: 8px 0;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--gray-300);
 }
 
 .PostDetail__Post {

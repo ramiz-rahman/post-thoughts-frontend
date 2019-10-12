@@ -1,61 +1,58 @@
+@import '../../styles/colors.css';
+
 .Comment {
   display: grid;
-  grid-template-rows: minmax(20px, auto) minmax(40px, auto) minmax(
-      20px,
+  grid-template-rows: minmax(1.5rem, auto) minmax(2.5rem, auto) minmax(
+      1.5rem,
       auto
     );
-  grid-template-columns: 40px auto;
+  grid-template-columns: 2.5rem auto;
   grid-template-areas: 'aside header' 'aside body' 'aside footer';
-  border-radius: 4px;
   min-width: 320px;
+  max-width: 1140px;
   align-items: center;
-  margin: 20px;
 }
 
 .Comment__Header {
   grid-area: header;
   font-size: 0.875rem;
-  padding: 0 8px;
+  padding: 0.5rem 0.5rem 0;
+}
+
+.Comment__Header em {
+  padding-right: 0.5rem;
 }
 
 .Comment__Body {
   grid-area: body;
-  padding: 0 8px;
+  padding: 0.5rem 0.5rem 0;
+}
+
+.Comment__TextInput {
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .Comment__Aside {
   grid-area: aside;
-  border-right: 2px solid #e6e6e6;
+  border-right: 2px solid var(--gray-300);
   height: 100%;
-  padding-top: 10px;
+  padding-top: 1rem;
 }
 
 .Comment__Aside_votes_positive {
-  border-color: #009499;
+  border-color: var(--green);
 }
 
 .Comment__Aside_votes_negative {
-  border-color: #de4d44;
+  border-color: var(--red);
 }
 
 .Comment__Footer {
   grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-size: 0.875rem;
-  padding: 0 8px;
-}
-
-.Comment__Action {
-  outline: none;
-  border: none;
-  background: none;
-  padding: 0 8px 0 0;
-}
-
-.Comment__Action:hover {
-  cursor: pointer;
-  color: #009499;
-}
-
-.Comment__Action:focus {
-  outline: none;
+  padding: 0.5rem 0.5rem 0.25rem;
 }
