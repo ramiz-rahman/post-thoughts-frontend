@@ -1,0 +1,24 @@
+@import '../../styles/colors.css';
+
+.Footer {
+  width: 100%;
+  height: 2.5rem;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--black-a5);
+  backdrop-filter: var(--brighten-n-blur);
+  word-spacing: 0.25rem;
+}
+
+.Footer__Heart {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.Footer__Link {
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: underline;
+}
