@@ -9,6 +9,7 @@ import * as actionCreators from '../../actions';
 import Post from '../Post/Post';
 import Comment from '../../components/Comment/Comment';
 import CommentForm from '../../components/CommentForm/CommentForm';
+import Loader from '../../components/UI/Loader/Loader';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -31,27 +32,36 @@ class PostDetail extends Component {
           <h5 className={styles.PostDetail__CommentListHeader}>
             {this.props.comments.length} Comments
           </h5>
-          {this.props.comments.map((comment) => (
-            <div class={styles.PostDetail__Comment}>
-              <Comment
+
+          {!this.props.commentsLoading ? (
+            this.props.comments.map((comment) => (
+              <div
+                className={styles.PostDetail__Comment}
                 key={comment.id}
-                comment={comment}
-                onUpVote={this.props.upVoteComment.bind(
-                  null,
-                  comment.id
-                )}
-                onDownVote={this.props.downVoteComment.bind(
-                  null,
-                  comment.id
-                )}
-                onEdit={this.props.editComment.bind(null, comment.id)}
-                onDelete={this.props.deleteComment.bind(
-                  null,
-                  comment.id
-                )}
-              />
+              >
+                <Comment
+                  comment={comment}
+                  onUpVote={this.props.upVoteComment.bind(
+                    null,
+                    comment.id
+                  )}
+                  onDownVote={this.props.downVoteComment.bind(
+                    null,
+                    comment.id
+                  )}
+                  onEdit={this.props.editComment.bind(null, comment.id)}
+                  onDelete={this.props.deleteComment.bind(
+                    null,
+                    comment.id
+                  )}
+                />
+              </div>
+            ))
+          ) : (
+            <div className={styles.PostDetail__LoadingIcon}>
+              <Loader />
             </div>
-          ))}
+          )}
         </div>
       </div>
     );
@@ -67,7 +77,8 @@ const mapStateToProps = (state, ownProps) => {
           state.comments[commentId].parentId ===
           ownProps.match.params.id
       )
-      .map((commentId) => state.comments[commentId])
+      .map((commentId) => state.comments[commentId]),
+    commentsLoading: state.ui.commentsLoading
   };
 };
 

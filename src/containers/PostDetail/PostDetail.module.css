@@ -5,7 +5,6 @@
   max-width: 1140px;
   padding: 1.5rem 1rem;
   margin: 0 auto;
-  /* background: var(--blue-500); */
 }
 
 .PostDetail__CommentForm {
@@ -23,7 +22,6 @@
 
 .PostDetail__Comment {
   background-color: var(--white-a5);
-  /* backdrop-filter: var(--brighten-n-blur); */
   border: 1px solid var(--gray-300);
   margin-top: 1rem;
 }
@@ -34,4 +32,12 @@
 }
 
 .PostDetail__Post {
+}
+
+.PostDetail__LoadingIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--black-a3);
 }
