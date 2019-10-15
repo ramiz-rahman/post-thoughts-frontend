@@ -1,0 +1,48 @@
+@import '../../../styles/colors.css';
+
+.Loader {
+  display: inline-block;
+  position: relative;
+  width: 10rem;
+  height: 8rem;
+}
+
+.Loader__Bar {
+  display: inline-block;
+  position: absolute;
+  left: 1rem;
+  width: 2rem;
+  background: var(--white-a7);
+  backdrop-filter: var(--brighten-n-blur);
+  animation: Loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.Loader__FirstBar {
+  composes: Loader__Bar;
+  left: 1rem;
+  animation-delay: -0.24s;
+}
+
+.Loader__SecondBar {
+  composes: Loader__Bar;
+  left: 4rem;
+  animation-delay: -0.12s;
+}
+
+.Loader__ThirdBar {
+  composes: Loader__Bar;
+  left: 7rem;
+  animation-delay: 0;
+}
+
+@keyframes Loader {
+  0% {
+    top: 2rem;
+    height: 6rem;
+  }
+  50%,
+  100% {
+    top: 4rem;
+    height: 2rem;
+  }
+}
