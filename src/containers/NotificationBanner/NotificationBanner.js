@@ -48,8 +48,8 @@ const NotificationBanner = ({ message, color, close }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  message: state.notification.message,
-  color: state.notification.color
+  message: state.ui.notification.message,
+  color: state.ui.notification.color
 });
 
 const mapDispatchToProps = (dispatch) => ({

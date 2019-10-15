@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   posts: postsReducer,
   comments: commentsReducer,
-  notification: uiReducer
+  ui: uiReducer
 });
 
 export default rootReducer;

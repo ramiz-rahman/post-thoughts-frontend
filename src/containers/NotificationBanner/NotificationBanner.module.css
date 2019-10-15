@@ -1,10 +1,12 @@
+@import '../../styles/colors.css';
+
 .NotificationBanner {
   position: relative;
   z-index: 10;
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
-  background-color: var(--blue-50);
+  background-color: var(--blue-500);
 }
 
 .NotificationBanner__CloseIcon {
@@ -17,15 +19,15 @@
 }
 
 .NotificationBanner_color_success {
-  background-color: var(--green-50);
+  background-color: var(--green-500);
 }
 
 .NotificationBanner_color_warning {
-  background-color: var(--yellow-50);
+  background-color: var(--yellow-500);
 }
 
 .NotificationBanner_color_danger {
-  background-color: var(--red-50);
+  background-color: var(--red-500);
 }
 
 .NotificationBanner_hidden {
