@@ -1,5 +1,9 @@
 import * as actionTypes from './actionTypes.js';
-import { setNotification } from './uiActions';
+import {
+  setNotification,
+  setPostsLoading,
+  unsetPostsLoading
+} from './uiActions';
 import * as API from '../utils/PostsAPI';
 import uuidv5 from 'node-uuid';
 
@@ -27,12 +31,15 @@ const deletePostSuccess = (post) => ({
 /* ASYNC ACTION CREATORS (EXTERNAL) */
 export const getAllPosts = () => {
   return async function(dispatch) {
+    dispatch(setPostsLoading());
+
     const posts = await API.getAllPosts();
     const postsById = posts.reduce((postsById, post) => {
       postsById[post.id] = post;
       return postsById;
     }, {});
 
+    dispatch(unsetPostsLoading());
     return dispatch(readAllPostsSuccess(postsById));
   };
 };
@@ -46,6 +53,8 @@ export const getPost = (id) => {
 
 export const createPost = ({ category, author, title, body }) => {
   return async function(dispatch) {
+    dispatch(setPostsLoading());
+
     const post = {
       category,
       author,
@@ -55,6 +64,8 @@ export const createPost = ({ category, author, title, body }) => {
       id: uuidv5('ramiz')
     };
     const createdPost = await API.createPost(post);
+
+    dispatch(unsetPostsLoading());
     dispatch(readPostSuccess(createdPost));
     dispatch(
       setNotification(`Post has been created by ${author}`, 'success')
@@ -64,7 +75,11 @@ export const createPost = ({ category, author, title, body }) => {
 
 export const editPost = ({ id, title, body }) => {
   return async function(dispatch) {
+    dispatch(setPostsLoading());
+
     const updatedPost = await API.updatePost(id, title, body);
+
+    dispatch(unsetPostsLoading());
     dispatch(updatePostSuccess(updatedPost));
     dispatch(
       setNotification(
@@ -93,7 +108,11 @@ export const downVotePost = (id) => {
 
 export const deletePost = (id) => {
   return async function(dispatch) {
+    dispatch(setPostsLoading());
+
     const deletedPost = await API.deletePost(id);
+
+    dispatch(unsetPostsLoading());
     dispatch(deletePostSuccess(deletedPost));
     dispatch(
       setNotification(

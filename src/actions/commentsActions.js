@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes.js';
+import { setCommentsLoading, unsetCommentsLoading } from './uiActions';
 import * as API from '../utils/PostsAPI';
 import uuidv5 from 'node-uuid';
 
@@ -30,17 +31,23 @@ const deleteCommentSuccess = (comment) => ({
 
 export const getPostComments = (postId) => {
   return async function(dispatch) {
+    dispatch(setCommentsLoading());
+
     const comments = await API.getPostComments(postId);
     const commentsById = comments.reduce((commentsById, comment) => {
       commentsById[comment.id] = comment;
       return commentsById;
     }, {});
+
+    dispatch(unsetCommentsLoading());
     dispatch(readPostCommentsSuccess(commentsById));
   };
 };
 
 export const createComment = ({ author, body, postId }) => {
   return async function(dispatch) {
+    dispatch(setCommentsLoading());
+
     let newComment = {
       id: uuidv5('ramiz'),
       parentId: postId,
@@ -49,6 +56,8 @@ export const createComment = ({ author, body, postId }) => {
       body: body
     };
     newComment = await API.addCommentToPost(newComment);
+
+    dispatch(unsetCommentsLoading());
     dispatch(createCommentSuccess(newComment));
     dispatch(getPost(postId));
   };
