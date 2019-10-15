@@ -6,9 +6,10 @@
 .CategoryView__NavigationBarContainer {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding-left: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(10px);
+  background-color: var(--white-a7);
+  backdrop-filter: var(--brighten-n-blur);
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -50,7 +51,14 @@
 
 .CategoryView__Post {
   border-radius: 0.25rem;
-  box-shadow: 0 2px 2px 0 var(--gray-600);
   margin-bottom: 1.5rem;
   overflow: hidden;
+}
+
+.CategoryView__LoadingIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: calc(35vh - 8rem);
 }

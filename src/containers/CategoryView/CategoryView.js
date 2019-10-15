@@ -9,18 +9,14 @@ import * as actions from '../../actions';
 import { getFilteredPostList } from '../../reducers';
 
 // Sub components
-import CategoryNav from '../../components/CategoryNav/CategoryNav';
-import Sort from '../../components/Sort/Sort';
 import Post from '../Post/Post';
-import Button from '../../components/UI/Button/Button';
-import { MdAdd as AddIcon } from 'react-icons/md';
+import Loader from '../../components/UI/Loader/Loader';
 import {
   MdNewReleases,
   MdWhatshot,
   MdStar,
   MdAvTimer
 } from 'react-icons/md';
-
 import {
   MdMenu as MenuClosed,
   MdClose as MenuOpened
@@ -70,11 +66,17 @@ class Category extends Component {
         </div>
 
         <section className={styles.CategoryView__PostList}>
-          {posts.map((post) => (
-            <div className={styles.CategoryView__Post} key={post.id}>
-              <Post id={post.id} />
+          {!this.props.postsLoading ? (
+            posts.map((post) => (
+              <div className={styles.CategoryView__Post} key={post.id}>
+                <Post id={post.id} />
+              </div>
+            ))
+          ) : (
+            <div className={styles.CategoryView__LoadingIcon}>
+              <Loader />
             </div>
-          ))}
+          )}
         </section>
       </div>
     );
@@ -112,7 +114,8 @@ const mapStateToProps = (state, ownProps) => {
   let sortedPostList = _sortPosts(postList, sortBy);
   return {
     categories: state.categories,
-    posts: sortedPostList
+    posts: sortedPostList,
+    postsLoading: state.ui.postsLoading
   };
 };
 
