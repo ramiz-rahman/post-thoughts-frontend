@@ -16,7 +16,7 @@
   position: relative;
   top: 35vh;
   margin: 0 auto;
-  width: 15rem;
+  width: 18rem;
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: brightness(180%) blur(0.5rem);
@@ -31,5 +31,10 @@
   justify-content: space-around;
   padding: 0.5rem;
   border-top: 1px solid var(--gray-200);
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
+}
+
+.Alert__Text {
+  padding: 0.5rem;
+  padding-bottom: 0;
 }

@@ -10,6 +10,7 @@ const Footer = () => {
         <a
           href="https://www.linkedin.com/in/ramiz-rahman/"
           target="_blank"
+          rel="noopener noreferrer"
           className={styles.Footer__Link}
         >
           Ramiz Rahman

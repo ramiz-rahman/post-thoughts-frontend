@@ -20,7 +20,7 @@
 }
 
 .Selector__Placeholder {
-  color: var(--gray-800);
+  color: var(--gray-600);
 }
 
 .Selector__Icon {
@@ -35,7 +35,7 @@
   right: 0;
 
   max-height: 80vh;
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-300);
   border-top: none;
   padding: 0;
 
@@ -43,13 +43,12 @@
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(10px);
+  background-color: var(--white);
   list-style: none;
 }
 
 .Selector__ListItem {
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-300);
   padding: 0.75rem;
 }
 

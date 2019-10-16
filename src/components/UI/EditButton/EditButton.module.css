@@ -4,9 +4,9 @@
   padding: 4px;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--blue);
+  color: var(--teal-tint);
 }
 
 .EditButton:hover {
-  color: var(--blue-tint);
+  color: var(--teal);
 }

@@ -8,8 +8,11 @@ const Alert = ({ title, body, confirmText, onConfirm, onCancel }) => {
   return (
     <div className={styles.Alert} onClick={onCancel}>
       <div className={styles.Alert__Content}>
-        <h5>{title}</h5>
-        <p>{body}</p>
+        <div className={styles.Alert__Text}>
+          <h5>{title}</h5>
+          <p>{body}</p>
+        </div>
+
         <div className={styles.Alert__Actions}>
           <Button size="inline" value="Cancel" onClick={onCancel} />
           <Button

@@ -4,13 +4,13 @@
   border: none;
   outline: none;
   text-transform: uppercase;
-  border-radius: 4px;
-  padding: 8px 12px;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--blue);
+  background-color: var(--teal-tint);
   color: var(--white);
 }
 
@@ -19,12 +19,12 @@
 }
 
 .Button:hover {
-  background-color: var(--blue-tint);
+  background-color: var(--teal);
 }
 
 .Button__Icon {
   font-size: 1.5rem;
-  padding-right: 4px;
+  padding-right: 0.25rem;
 }
 
 .Button__Text {
@@ -32,50 +32,50 @@
 }
 
 .Button_size_inline {
-  padding: 4px 4px;
+  padding: 0.25rem;
   background: none;
-  color: var(--blue);
+  color: var(--teal-tint);
 }
 
 .Button_size_inline:hover {
   background: none;
-  color: var(--blue-tint);
+  color: var(--teal);
 }
 
 .Button_size_inline .Button__Icon {
   font-size: 1.25rem;
-  padding-right: 4px;
+  padding-right: 0.25rem;
 }
 
 .Button_size_s {
-  padding: 4px 4px;
+  padding: 0.25rem 0.5rem;
 }
 
 .Button_size_s .Button__Icon {
   font-size: 1.25rem;
-  padding-right: 4px;
+  padding-right: 0.25rem;
 }
 
 .Button_size_m {
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
 }
 
 .Button_size_m .Button_Icon {
   font-size: 1.5rem;
-  padding-right: 8px;
+  padding-right: 0.5rem;
 }
 
 .Button_size_l {
-  padding: 12px 20px;
+  padding: 0.75rem 1.25rem;
 }
 
 .Button_size_l .Button_Icon {
   font-size: 2rem;
-  padding-right: 8px;
+  padding-right: 0.5rem;
 }
 
 .Button_size_block {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   width: 100%;
 }
 

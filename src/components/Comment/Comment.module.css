@@ -41,11 +41,11 @@
 }
 
 .Comment__Aside_votes_positive {
-  border-color: var(--green);
+  border-color: var(--green-500);
 }
 
 .Comment__Aside_votes_negative {
-  border-color: var(--red);
+  border-color: var(--red-500);
 }
 
 .Comment__Footer {

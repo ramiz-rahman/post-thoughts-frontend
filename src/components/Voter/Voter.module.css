@@ -1,3 +1,5 @@
+@import '../../styles/colors.css';
+
 .Voter {
   display: flex;
   flex-direction: column;
@@ -10,7 +12,7 @@
 }
 
 .Voter__UpVote:hover {
-  color: #009499;
+  color: var(--green-500);
 }
 
 .Voter__DownVote {
@@ -18,7 +20,7 @@
 }
 
 .Voter__DownVote:hover {
-  color: #de4d44;
+  color: var(--red-500);
 }
 
 .Voter_horizontal {
