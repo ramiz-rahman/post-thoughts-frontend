@@ -6,7 +6,7 @@ if (!token) {
     .substr(-8);
 }
 
-const api = 'http://localhost:3001';
+const api = 'https://ramiz-post-thoughts-api-server.herokuapp.com';
 
 const headers = {
   Accept: 'application/json',
