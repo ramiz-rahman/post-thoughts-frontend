@@ -29,6 +29,16 @@
   border: 1px solid var(--gray-300);
 }
 
+.PostForm__ErrorMsg {
+  font-size: 0.875rem;
+  color: var(--red);
+  padding: 0.5rem 0.25rem 0;
+}
+
+.PostForm__ErrorMsg_hidden {
+  display: none;
+}
+
 .PostForm__Body {
   composes: PostForm__Input;
   height: 10rem;

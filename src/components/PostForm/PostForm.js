@@ -21,7 +21,8 @@ class PostForm extends Component {
     title: '',
     body: '',
     categories: [],
-    editing: false
+    editing: false,
+    errors: new Set()
   };
 
   componentDidMount() {
@@ -87,18 +88,24 @@ class PostForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { onEdit, onCreate } = this.props;
-    const post = {
-      category: this.state.category,
-      author: this.state.author,
-      title: this.state.title,
-      body: this.state.body
-    };
-
-    if (this.state.editing) {
-      onEdit(post);
+    if (this.state.category.length === 0) {
+      this.setState((prevState) => ({
+        errors: new Set([...prevState.errors, 'category not selected!'])
+      }));
     } else {
-      onCreate(post);
+      const { onEdit, onCreate } = this.props;
+      const post = {
+        category: this.state.category,
+        author: this.state.author,
+        title: this.state.title,
+        body: this.state.body
+      };
+
+      if (this.state.editing) {
+        onEdit(post);
+      } else {
+        onCreate(post);
+      }
     }
   };
 
@@ -109,6 +116,7 @@ class PostForm extends Component {
           categories={this.state.categories}
           selected={this.state.category}
           onSelect={this.handleCategoryChange}
+          errors={this.state.errors}
         />
         <TextInputField
           name="Author"
@@ -128,14 +136,20 @@ class PostForm extends Component {
           value={this.state.body}
           onChange={this.handleBodyChange}
         />
-        <SubmitButton editStatus={this.state.editing} />
+        <SubmitButton
+          editStatus={this.state.editing}
+          onSubmit={this.handleSubmit}
+        />
       </form>
     );
   }
 }
 
 // Category Selector
-function CategorySelector({ categories, selected, onSelect }) {
+function CategorySelector({ categories, selected, onSelect, errors }) {
+  let displayErrClass = errors.has('category not selected!')
+    ? null
+    : styles.PostForm__ErrorMsg_hidden;
   return (
     <label className={styles.PostForm__Field}>
       <span className={styles.PostForm__Label}>Category</span>
@@ -147,13 +161,19 @@ function CategorySelector({ categories, selected, onSelect }) {
           onSelect={onSelect}
         />
       </div>
+      <span
+        className={`${styles.PostForm__ErrorMsg} ${displayErrClass}`}
+      >
+        &#9888; Please select a category
+      </span>
     </label>
   );
 }
 CategorySelector.propTypes = {
   categories: PropTypes.array.isRequired,
   selected: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  errors: PropTypes.object
 };
 
 // Text Input Field
@@ -207,9 +227,18 @@ function SubmitButton({ editStatus }) {
   const text = editStatus ? 'Edit' : 'Create';
   return (
     <div className={styles.PostForm__Footer}>
-      <Button value={text} size="block" color="success" />
+      <Button
+        value={text}
+        size="block"
+        color="success"
+        onClick={() => null}
+      />
     </div>
   );
 }
+
+SubmitButton.propTypes = {
+  editStatus: PropTypes.bool.isRequired
+};
 
 export default PostForm;
