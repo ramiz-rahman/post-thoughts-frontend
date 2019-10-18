@@ -1,68 +1,126 @@
+# Post Thoughts
+
+This is a content and comment web app built with react and redux. Users can post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users are also able to edit and delete posts and comments.
+
+This app is deployed with Netlify and can be accessed here: https://post-thoughts.ramizrahman.com.
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/648c3d6f-520d-4755-a3f0-c35e88b11aa6/deploy-status)](https://app.netlify.com/sites/ramizrahman-post-thoughts/deploys)
+
+
+## Purpose
+
+This content and comment structure is common across a large number of websites and applications, from news sites to blogs to aggregators like Hacker News and Reddit. My purpose with building this app was to gain an understanding and demonstrate how React and Redux can function in a standard type of application.
+
+I've also structured my React components in a modular way so that they can used as a starter kit for building similar kinds of applications in the future. 
+
+
+## Installation 
+
+The app is already deployed so you can play around with the final product using this [link](https://post-thoughts.ramizrahman.com).
+
+If you wish to run this app locally, clone this repo and install the dependencies.
+```
+$ git clone https://github.com/ramiz-rahman/post-thoughts-frontend.git
+$ cd post-thoughts-frontend
+$ npm install
+```
+
+The backend server is a modified fork of [udacity's readable demo server](https://github.com/udacity/reactnd-project-readable-starter) that is deployed using [heroku](https://ramiz-post-thoughts-api-server.herokuapp.com/). 
+
+As the heroku server is running on a free dyno, for best performance I would strongly recommend installing the [server](https://github.com/udacity/reactnd-project-readable-starter) locally and then replace the line 9 in the `src/utils/PostsApi.js` file: 
+
+```
+const api = 'https://ramiz-post-thoughts-api-server.herokuapp.com';
+```
+
+with the following: 
+
+```
+const api = 'http://localhost:3001';
+```
+
+The server's endpoints are used to manage storing, reading, updating, and deleting data for the application.
+
+### Learn More
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## App Conventions
 
-### Analyzing the Bundle Size
+The app is grouped into components and containers. The key difference between the two are that containers connect directly to the Redux store whereas components do not. They are separated into two different folders: `src/components` and `src/containers`. However, both of these groups follow these common conventions: 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+1. Each component or container is contained in its own folder. 
+2. The folder is named in PascalCase. 
+3. The folder contains a minimum of two files - a `<ComponentName>.js` file and a  `<ComponentName>.module.css` file. 
+4. The `<ComponentName>` is the same as the folder name and is written in PascalCase. 
+5. The `<ComponentName>.js` file imports React and a styles object from the `<ComponentName>.module.css` file.
+6. The `<ComponentName>.module.css` file imports the `src/styles/colors.css` file that contains css variables. This is used to ensure that app colors are consistent across all components and can be updated from one place only, thus making the code more reusable and dry. The idea can be extended for layouts and typography as well but I felt it was not needed for this app. 
+7. The `<ComponentName>.module.css` file only contains rules for classes which are written using an alternate style naming scheme of [BEM](https://en.bem.info/methodology/quick-start/) that is described as follows: 
 
-### Making a Progressive Web App
+   * Blocks are written in PascalCase and must match the name of the corresponding component. 
+   * Elements are also written in PascalCase and separated brom the block using double underscores (`__`). eg. `ComponentName__ElementName`.
+   * An element is always part of a block, not another element. 
+   * Modifiers are written in lowercase.
+   * The modifier name is separated from the block or element name by a single underscore (`_`). eg. `ComponentName_modifername_modifiervalue`
+   
+The `index.css` file uses a modified version of Bootsrap's [reboot.css](https://github.com/twbs/bootstrap/blob/v4-dev/dist/css/bootstrap-reboot.css) file. This is used to ensure that the styling remains consistent across different browsers. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## App Functionality 
 
-### Advanced Configuration
+The app has three primary views as defined below: 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Category view 
 
-### Deployment
+This is the default (Root) view of the app with **all** being the default category. It contains an action bar and a list of all posts.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![all categories](https://i.imgur.com/Fz6MxAH.png)
 
-### `npm run build` fails to minify
+The action bar itelf contains a list of all available categories, which when clicked, takes you to the category view for that category.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![selected category](https://i.imgur.com/6NSYuUk.png)
+
+The action bar also contains a control for sorting the list of posts. The controls are defined as follows: 
+
+* __Top Rated__: Sorts by the votescore in descending order 
+* __Controversial__: Sorts by the votescore in ascending order 
+* __Latest__: Sorts by timestamp in descending order 
+* __Oldest__: Sorts by timestamp in ascending order 
+
+![sort in action](https://i.imgur.com/U0jCx4q.png)
+
+The action bar also contains a button that navigates you to the Create Post View 
+
+
+### Create/Edit Post View 
+
+The Create or Edit Post view changes based on how it was reached. If it was reached using the create button, then the form displayed is empty and you have to fill everything up. 
+
+![create post](https://i.imgur.com/GeAeyaS.png)
+
+If you had navigated this to this view by clicking on the edit button of a post, then the details of the post would have already been filled up. 
+
+![Imgur](https://i.imgur.com/0Mgnnp7.png)
+
+
+### Post Details View 
+
+Click on the body of a post from the category view to navigate to the post details view. Here you can see the post along with a form for adding a comment and a list of comments for that post. 
+
+To add a comment, type into the commnet box and click the *comment* button
+
+![add comment](https://i.imgur.com/akPV1yO.png)
+
+Once the comment is saved, it will appear in the list of comments. 
+
+![comment list](https://i.imgur.com/1Byb2H8.png)
+
+Like posts, comments can be upvoted or downvoted, edited and deleted. 
+
+## License
+
+My Reads is released under the [MIT License](https://choosealicense.com/licenses/mit/)
