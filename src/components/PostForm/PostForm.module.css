@@ -19,6 +19,12 @@
   background-color: var(--white);
 }
 
+.PostForm__DisabledText {
+  background-color: var(--gray-50);
+  padding: 0.5rem;
+  color: var(--gray-800);
+}
+
 .PostForm__Label {
   font-weight: 700;
   font-size: 0.875rem;

@@ -117,6 +117,7 @@ class PostForm extends Component {
           selected={this.state.category}
           onSelect={this.handleCategoryChange}
           errors={this.state.errors}
+          disabled={this.state.editing}
         />
         <TextInputField
           name="Author"
@@ -147,7 +148,13 @@ class PostForm extends Component {
 }
 
 // Category Selector
-function CategorySelector({ categories, selected, onSelect, errors }) {
+function CategorySelector({
+  categories,
+  selected,
+  onSelect,
+  errors,
+  disabled
+}) {
   let displayErrClass = errors.has('category not selected!')
     ? null
     : styles.PostForm__ErrorMsg_hidden;
@@ -155,12 +162,18 @@ function CategorySelector({ categories, selected, onSelect, errors }) {
     <label className={styles.PostForm__Field}>
       <span className={styles.PostForm__Label}>Category</span>
       <div className={styles.PostForm__CategorySelector}>
-        <Selector
-          options={categories}
-          selected={selected}
-          placeholder="Select a category"
-          onSelect={onSelect}
-        />
+        {disabled ? (
+          <div className={styles.PostForm__DisabledText}>
+            {selected}
+          </div>
+        ) : (
+          <Selector
+            options={categories}
+            selected={selected}
+            placeholder="Select a category"
+            onSelect={onSelect}
+          />
+        )}
       </div>
       <span
         className={`${styles.PostForm__ErrorMsg} ${displayErrClass}`}
@@ -189,7 +202,9 @@ function TextInputField({
     <label className={styles.PostForm__Field}>
       <span className={styles.PostForm__Label}>{name}</span>
       <input
-        className={styles.PostForm__Input}
+        className={`${styles.PostForm__Input} + ${
+          disabled ? styles.PostForm__DisabledText : null
+        }`}
         type="text"
         name={name}
         placeholder={placeholder}
