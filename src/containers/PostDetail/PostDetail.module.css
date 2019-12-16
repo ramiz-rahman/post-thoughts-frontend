@@ -16,7 +16,8 @@
 .PostDetail__CommentList {
   margin-top: 2rem;
   background-color: var(--white-a7);
-  backdrop-filter: var(--brighten-n-blur);
+  /* BUG: backdrop filter causes fixed positioned elements to be contained */
+  /* backdrop-filter: var(--brighten-n-blur); */
   padding: 1rem;
 }
 
