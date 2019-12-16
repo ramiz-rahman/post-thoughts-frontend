@@ -123,6 +123,7 @@ class PostForm extends Component {
           placeholder="What's your name"
           value={this.state.author}
           onChange={this.handleAuthorChange}
+          disabled={this.state.editing}
         />
         <TextInputField
           name="Title"
@@ -177,7 +178,13 @@ CategorySelector.propTypes = {
 };
 
 // Text Input Field
-function TextInputField({ name, placeholder, value, onChange }) {
+function TextInputField({
+  name,
+  placeholder,
+  value,
+  onChange,
+  disabled
+}) {
   return (
     <label className={styles.PostForm__Field}>
       <span className={styles.PostForm__Label}>{name}</span>
@@ -189,6 +196,7 @@ function TextInputField({ name, placeholder, value, onChange }) {
         value={value}
         onChange={onChange}
         required
+        disabled={disabled}
       />
     </label>
   );
