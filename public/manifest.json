@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Post Thoughts",
+  "name": "Post Thoughts by Ramiz Rahman",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,10 +16,10 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
-    }	    
+    }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "rgb(255, 59, 48)",
+  "background_color": "rgb(255, 131, 125)"
 }
