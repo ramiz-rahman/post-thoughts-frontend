@@ -39,6 +39,12 @@ const NotificationBanner = ({ message, color, close }) => {
   return message ? (
     <div className={className}>
       <div>{message}</div>
+      <div>
+        <strong>
+          Please note that this is a demo application. All changes will
+          be reset after 25 minutes.
+        </strong>
+      </div>
       <CloseIcon
         className={styles.NotificationBanner__CloseIcon}
         onClick={close}

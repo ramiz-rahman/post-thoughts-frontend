@@ -1,5 +1,9 @@
 import * as actionTypes from './actionTypes.js';
-import { setCommentsLoading, unsetCommentsLoading } from './uiActions';
+import {
+  setNotification,
+  setCommentsLoading,
+  unsetCommentsLoading
+} from './uiActions';
 import * as API from '../utils/PostsAPI';
 import uuidv5 from 'node-uuid';
 
@@ -59,6 +63,12 @@ export const createComment = ({ author, body, postId }) => {
 
     dispatch(unsetCommentsLoading());
     dispatch(createCommentSuccess(newComment));
+    dispatch(
+      setNotification(
+        `Comment has been created by ${author}`,
+        'success'
+      )
+    );
     dispatch(getPost(postId));
   };
 };
@@ -68,6 +78,12 @@ export const editComment = ({ id, body }) => {
     const timestamp = Date.now();
     const updatedComment = await API.editComment(id, timestamp, body);
     dispatch(updateCommentSuccess(updatedComment));
+    dispatch(
+      setNotification(
+        `Comment has been updated by ${updatedComment.author}`,
+        'warning'
+      )
+    );
   };
 };
 
@@ -92,5 +108,11 @@ export const deleteComment = (id) => {
     const deletedComment = await API.deleteComment(id);
     dispatch(deleteCommentSuccess(deletedComment));
     dispatch(getPost(deletedComment.parentId));
+    dispatch(
+      setNotification(
+        `${deletedComment.author}'s comment has been deleted.`,
+        'danger'
+      )
+    );
   };
 };

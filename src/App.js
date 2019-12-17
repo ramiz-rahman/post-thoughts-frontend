@@ -69,7 +69,4 @@ const mapDispatchToProps = (dispatch) => ({
   getAllPosts: () => dispatch(actionCreators.getAllPosts())
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default connect(null, mapDispatchToProps)(App);
