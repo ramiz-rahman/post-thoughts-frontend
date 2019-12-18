@@ -16,6 +16,24 @@ const Footer = () => {
           Ramiz Rahman
         </a>
       </div>
+      <div>
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.Footer__Link}
+        >
+          Demo
+        </a>{' '}
+        <a
+          href="https://github.com/ramiz-rahman/post-thoughts-frontend"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.Footer__Link}
+        >
+          Code
+        </a>
+      </div>
     </div>
   );
 };
