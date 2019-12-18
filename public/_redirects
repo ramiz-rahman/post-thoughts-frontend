@@ -1,1 +1,12 @@
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect domain aliases to primary domain
+https://postthoughts.ramizrahman.com/* https://post-thoughts.ramizrahman.com/:splat 301!
+https://post-thought.ramizrahman.com/* https://post-thoughts.ramizrahman.com/:splat 301!
+https://postthought.ramizrahman.com/* https://post-thoughts.ramizrahman.com/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://post-thoughts.netlify.com/* https://post-thoughts.ramizrahman.com/:splat 301!
+
+# Delegate all requests to React Router 
 /*    /index.html   200
